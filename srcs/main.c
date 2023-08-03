@@ -179,141 +179,131 @@ float dist(float ax, float ay, float bx, float by, float an)
 
 void draw_3dray(t_map *map)
 {
-	int	r, mx, my, mp, dof;
-	float rx, ry, ra, xo, yo, hx, hy, vx, vy, disT;
-
-	ra = map->angle;
-	for (r = 0; r < 1; r++)
-	{
-		//-- CHECK HORIZONTAL LINE --//
-		dof = 0;
-		float disH = INT_MAX;
-		hx = map->pixels_x;
-		hy = map->pixels_y;
-		float aTan = -1/tan(ra);
-		// Looking DOWN //
-		if (ra > PI)
-		{
-			ry = (((int)map->pixels_y/64)*64)-0.0001;
-			rx = (map->pixels_y-ry)*aTan+map->pixels_x;
-			yo = -64;
-			xo = -yo*aTan;
-		}
-		// Looking UP //
-		if (ra < PI)
-		{
-			ry = (((int)map->pixels_y/64)*64)+64;
-			rx = (map->pixels_y-ry)*aTan+map->pixels_x;
-			yo = 64;
-			xo = -yo*aTan;
-		}
-		// Looking Straight
-		if (ra == 0 || ra == PI)
-		{
-			rx = map->pixels_x;
-			ry = map->pixels_y;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)/64;
-			my = (int)(ry)/64;
-			printf("%dMX\n", mx);
-			printf("%dMY\n", my);
-			mp = my * mx;
-			if (mx < 0)
-				mx = 0;
-			else if (mx > 6)
-				mx = 0;
-			if (my < 0)
-				my = 0;
-			else if (my > 6)
-				my = 6;
-			if (map->map[my][mx] == '1' && mx <= 6 && mx >= 0 && my <= 6 && my >= 0 && mp > 0)
+    int    r, mx, my, dof;
+    float rx, ry, ra, xo, yo, hx, hy, vx, vy, disT;
+    ra = map->angle;
+    for (r = 0; r < 1; r++)
+    {
+        //-- CHECK HORIZONTAL LINE --//
+        dof = 0;
+        float disH = INT_MAX;
+        hx = map->pixels_x;
+        hy = map->pixels_y;
+        float aTan = -1/tan(ra);
+        // Looking DOWN //
+        if (ra > PI)
+        {
+            ry = ((((int)map->pixels_y/64)*64)-0.0001);
+            rx = ((map->pixels_y-ry)*aTan)+map->pixels_x;
+            yo = -64;
+            xo = -yo*aTan;
+        }
+        // Looking UP //
+        if (ra < PI)
+        {
+            ry = ((((int)map->pixels_y/64)*64)+64);
+            rx = ((map->pixels_y-ry)*aTan)+map->pixels_x;
+            yo = 64;
+            xo = -yo*aTan;
+        }
+        // Looking Straight
+        if (ra == 0 || ra == PI)
+        {
+            rx = map->pixels_x;
+            ry = map->pixels_y;
+            dof = 8;
+        }
+        while (dof < 8)
+        {
+            mx = (int)(rx)/64;
+            my = (int)(ry)/64;
+            if (mx >= 0 && mx <= 6 && my >= 0 && my <= 6) 
 			{
-				hx = rx;
-				hy = ry;
-				disH = dist(map->pixels_x, map->pixels_y, hx, hy, ra);
-				dof = 8;
-			}
-			else
-			{
-				rx+=xo;
-				ry+=yo;
-				dof += 1;
-			}
-		}
+                if (map->map[my][mx] == '1')
+                {
+                    hx = rx;
+                    hy = ry;
+                    disH = dist(map->pixels_x, map->pixels_y, hx, hy, ra);
+                    dof = 8;
+                }
+                else
+                {
+                    rx+=xo;
+                    ry+=yo;
+                    dof += 1;
+                }
+            }
+            else
+                dof = 8;
+        }
 		//-- CHECK VERTICAL LINE --//
-		dof = 0;
-		float disV = INT_MAX;
-		vx = map->pixels_x;
-		vy = map->pixels_y;
-		float nTan = -tan(ra);
-		if (ra > P2 && ra < P3)
-		{
-			rx = (((int)map->pixels_x/64)*64)-0.0001;
-			ry = (map->pixels_x-rx)*nTan+map->pixels_y;
-			xo = -64;
-			yo = -xo*nTan;
-		}
-		if (ra < P2 || ra > P3)
-		{
-			rx = (((int)map->pixels_x/64)*64)+64;
-			ry = (map->pixels_x-rx)*nTan+map->pixels_y;
-			xo = 64;
-			yo = -xo*nTan;
-		}
-		if (ra == 0 || ra == PI)
-		{
-			rx = map->pixels_x;
-			ry = map->pixels_y;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)/64;
-			my = (int)(ry)/64;
-			mp = my * mx;
-			if (mx < 0)
-				mx = 0;
-			else if (mx > 6)
-				mx = 0;
-			if (my < 0)
-				my = 0;
-			else if (my > 6)
-				my = 6;
-			if (map->map[my][mx] == '1' && mx <= 6 && mx >= 0 && my <= 6 && my >= 0 && mp > 0)
+        dof = 0;
+        float disV = INT_MAX;
+        vx = map->pixels_x;
+        vy = map->pixels_y;
+        float nTan = -tan(ra);
+        if (ra > P2 && ra < P3)
+        {
+            rx = ((((int)map->pixels_x/64)*64)-0.0001);
+            ry = ((map->pixels_x-rx)*nTan)+map->pixels_y;
+            xo = -64;
+            yo = -xo*nTan;
+        }
+        if (ra < P2 || ra > P3)
+        {
+            rx = ((((int)map->pixels_x/64)*64)+64);
+            ry = ((map->pixels_x-rx)*nTan)+map->pixels_y;
+            xo = 64;
+            yo = -xo*nTan;
+        }
+        if (ra == 0 || ra == PI)
+        {
+            rx = map->pixels_x;
+            ry = map->pixels_y;
+            dof = 8;
+        }
+        while (dof < 8)
+        {
+            mx = (int)(rx)/64;
+            my = (int)(ry)/64;
+            if (mx >= 0 && mx <= 6 && my >= 0 && my <= 6) 
 			{
-				vx = rx;
-				vy = ry;
-				disV = dist(map->pixels_x, map->pixels_y, vx, vy, ra);
-				dof = 8;
-			}
-			else
-			{
-				rx+=xo;
-				ry+=yo;
-				dof += 1;
-			}
-		}
-		if (disV < disH)
-		{
-			rx=vx;
-			ry=vy;
-			disT = disV;
-		}
-		else
-		{
-			rx=hx;
-			ry=hy;
-			disT = disH;
-		}
+                if (map->map[my][mx] == '1')
+                {
+                    vx = rx;
+                    vy = ry;
+                    disV = dist(map->pixels_x, map->pixels_y, vx, vy, ra);
+                    dof = 8;
+                }
+                else
+                {
+                    rx+=xo;
+                    ry+=yo;
+                    dof += 1;
+                }
+            }
+            else 
+                dof = 8;
+        }
+        if (disV < disH)
+        {
+            rx=vx;
+            ry=vy;
+            disT = disV;
+        }
+        else
+        {
+            rx=hx;
+            ry=hy;
+            disT = disH;
+        }
 		draw_line(map, map->pixels_x, map->pixels_y, rx, ry, RGB_YELLOW);
 		//--DRAW 3D WALLS--//
 		float lineH = (6*320)/disT;
 		if (lineH>320)
 			lineH=320;
 		float lineO = 160-lineH/2;
+		//draw_line(map, r*8+530, lineO, r*8+530, lineH+lineO, RGB_RED);
 	}
 }
 

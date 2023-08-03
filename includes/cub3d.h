@@ -9,7 +9,7 @@
 
 # define PI 3.141592653589
 # define P2 PI/2
-# define P3 3*PI/2
+# define P3 (3*PI)/2
 # define RGB_RED 0xFF0000
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
