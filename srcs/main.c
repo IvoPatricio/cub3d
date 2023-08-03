@@ -187,7 +187,7 @@ void draw_3dray(t_map *map)
 	{
 		//-- CHECK HORIZONTAL LINE --//
 		dof = 0;
-		float disH = 10000000;
+		float disH = INT_MAX;
 		hx = map->pixels_x;
 		hy = map->pixels_y;
 		float aTan = -1/tan(ra);
@@ -240,18 +240,15 @@ void draw_3dray(t_map *map)
 			{
 				rx+=xo;
 				ry+=yo;
-				dof += 3;
+				dof += 1;
 			}
 		}
-		draw_line(map, map->pixels_x, map->pixels_y, rx + 10, ry, RGB_YELLOW);
-		draw_line(map, map->pixels_x, map->pixels_y, rx - 10, ry, RGB_YELLOW);
 		//-- CHECK VERTICAL LINE --//
 		dof = 0;
-		float disV = 10000000;
+		float disV = INT_MAX;
 		vx = map->pixels_x;
 		vy = map->pixels_y;
 		float nTan = -tan(ra);
-		// Looking DOWN //
 		if (ra > P2 && ra < P3)
 		{
 			rx = (((int)map->pixels_x/64)*64)-0.0001;
@@ -259,7 +256,6 @@ void draw_3dray(t_map *map)
 			xo = -64;
 			yo = -xo*nTan;
 		}
-		// Looking UP //
 		if (ra < P2 || ra > P3)
 		{
 			rx = (((int)map->pixels_x/64)*64)+64;
@@ -267,7 +263,6 @@ void draw_3dray(t_map *map)
 			xo = 64;
 			yo = -xo*nTan;
 		}
-		// Looking Straight
 		if (ra == 0 || ra == PI)
 		{
 			rx = map->pixels_x;
@@ -298,29 +293,27 @@ void draw_3dray(t_map *map)
 			{
 				rx+=xo;
 				ry+=yo;
-				dof += 3;
+				dof += 1;
 			}
 		}
-		draw_line(map, map->pixels_x, map->pixels_y, rx, ry, RGB_RED);
-		/*if (disV < disH)
+		if (disV < disH)
 		{
 			rx=vx;
 			ry=vy;
 			disT = disV;
 		}
-		if (disH < disV)
+		else
 		{
 			rx=hx;
 			ry=hy;
 			disT = disH;
 		}
-		// --DRAW 3D WALLS--//
+		draw_line(map, map->pixels_x, map->pixels_y, rx, ry, RGB_YELLOW);
+		//--DRAW 3D WALLS--//
 		float lineH = (6*320)/disT;
 		if (lineH>320)
 			lineH=320;
-		float lineO = 160-lineH/2;*/
-		//mlx_pixel_put(map->mlx, map->win, rx, ry-5, RGB_YELLOW);
-		//mlx_pixel_put(map->mlx, map->win, rx, ry, RGB_YELLOW);
+		float lineO = 160-lineH/2;
 	}
 }
 
