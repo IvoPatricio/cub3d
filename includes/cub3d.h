@@ -13,7 +13,8 @@
 # define RGB_RED 0xFF0000
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
-# define RGB_YELLOW 0xFFFF00	
+# define RGB_YELLOW 0xFFFF00
+# define DR 0.01745329
 # define WALL '1'
 # define FLOOR '0'
 # define SPACE ' '

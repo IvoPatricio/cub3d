@@ -123,14 +123,16 @@ void mlx_image(t_map *map)
 		"./sprites/black.xpm", &z, &z);
 }
 
-void draw_line(t_map *map, float x0, float y0, float x1, float y1) 
+void draw_line(t_map *map, float x0, float y0, float x1, float y1, int RGB) 
 {
-    float dx;
-    float dy;
-	float steps;
-    float x_increment;
-    float y_increment;
+    float	dx;
+    float	dy;
+	float	steps;
+    float	x_increment;
+    float	y_increment;
+	int		i;
 
+	i = -1;
 	dx = x1 - x0;
 	dy = y1 - y0;
 	steps = fmax(fabs(dx), fabs(dy));
@@ -138,12 +140,9 @@ void draw_line(t_map *map, float x0, float y0, float x1, float y1)
 	y_increment = dy / steps;
 	x_increment = dx / steps;
     y_increment = dy / steps;
-    for (int i = 0; i <= steps; i++) 
-	{
-        int x = (int)(x0 + i * x_increment);
-        int y = (int)(y0 + i * y_increment);
-        mlx_pixel_put(map->mlx, map->win, x, y, RGB_YELLOW);
-    }
+    while (i++ <= steps) 
+        mlx_pixel_put(map->mlx, map->win, (int)(x0 + i * x_increment), \
+			(int)(y0 + i * y_increment), RGB);
 }
 
 void draw_ray(t_map *map, int RGB)
@@ -175,7 +174,6 @@ void draw_player(t_map *map, int RGB)
 
 float dist(float ax, float ay, float bx, float by, float an)
 {
-	//triangle pitagu
 	return (sqrt(bx-ax) * (bx-ax) + (by-ay) * (by-ay));
 }
 
@@ -216,13 +214,22 @@ void draw_3dray(t_map *map)
 			ry = map->pixels_y;
 			dof = 8;
 		}
-		/*while (dof < 8)
+		while (dof < 8)
 		{
-			mx = (int)(rx)>>6;
-			my = (int)(ry)>>6;
-			mp = my*(6+mx);
-			printf("%d\n", mp);
-			if (mp > 0 && mp < 6*6 && map->map[my][mx] == '1')
+			mx = (int)(rx)/64;
+			my = (int)(ry)/64;
+			printf("%dMX\n", mx);
+			printf("%dMY\n", my);
+			mp = my * mx;
+			if (mx < 0)
+				mx = 0;
+			else if (mx > 6)
+				mx = 0;
+			if (my < 0)
+				my = 0;
+			else if (my > 6)
+				my = 6;
+			if (map->map[my][mx] == '1' && mx <= 6 && mx >= 0 && my <= 6 && my >= 0 && mp > 0)
 			{
 				hx = rx;
 				hy = ry;
@@ -233,10 +240,11 @@ void draw_3dray(t_map *map)
 			{
 				rx+=xo;
 				ry+=yo;
-				dof+=1;
+				dof += 3;
 			}
-		}*/
-		draw_line(map, map->pixels_x, map->pixels_y, rx, ry);
+		}
+		draw_line(map, map->pixels_x, map->pixels_y, rx + 10, ry, RGB_YELLOW);
+		draw_line(map, map->pixels_x, map->pixels_y, rx - 10, ry, RGB_YELLOW);
 		//-- CHECK VERTICAL LINE --//
 		dof = 0;
 		float disV = 10000000;
@@ -248,16 +256,16 @@ void draw_3dray(t_map *map)
 		{
 			rx = (((int)map->pixels_x/64)*64)-0.0001;
 			ry = (map->pixels_x-rx)*nTan+map->pixels_y;
-			yo = -64;
-			xo = -yo*nTan;
+			xo = -64;
+			yo = -xo*nTan;
 		}
 		// Looking UP //
 		if (ra < P2 || ra > P3)
 		{
 			rx = (((int)map->pixels_x/64)*64)+64;
 			ry = (map->pixels_x-rx)*nTan+map->pixels_y;
-			yo = 64;
-			xo = -yo*nTan;
+			xo = 64;
+			yo = -xo*nTan;
 		}
 		// Looking Straight
 		if (ra == 0 || ra == PI)
@@ -266,13 +274,20 @@ void draw_3dray(t_map *map)
 			ry = map->pixels_y;
 			dof = 8;
 		}
-		/*while (dof < 8)
+		while (dof < 8)
 		{
-			mx = (int)(rx)>>6;
-			my = (int)(ry)>>6;
-			mp = my*(6+mx);
-			printf("%d\n", mp);
-			if (mp > 0 && mp < 6*6 && map->map[my][mx] == '1')
+			mx = (int)(rx)/64;
+			my = (int)(ry)/64;
+			mp = my * mx;
+			if (mx < 0)
+				mx = 0;
+			else if (mx > 6)
+				mx = 0;
+			if (my < 0)
+				my = 0;
+			else if (my > 6)
+				my = 6;
+			if (map->map[my][mx] == '1' && mx <= 6 && mx >= 0 && my <= 6 && my >= 0 && mp > 0)
 			{
 				vx = rx;
 				vy = ry;
@@ -283,10 +298,11 @@ void draw_3dray(t_map *map)
 			{
 				rx+=xo;
 				ry+=yo;
-				dof+=1;
+				dof += 3;
 			}
-		}*/
-		if (disV < disH)
+		}
+		draw_line(map, map->pixels_x, map->pixels_y, rx, ry, RGB_RED);
+		/*if (disV < disH)
 		{
 			rx=vx;
 			ry=vy;
@@ -302,8 +318,7 @@ void draw_3dray(t_map *map)
 		float lineH = (6*320)/disT;
 		if (lineH>320)
 			lineH=320;
-		float lineO = 160-lineH/2;
-		draw_line(map, map->pixels_x, map->pixels_y, rx, ry);
+		float lineO = 160-lineH/2;*/
 		//mlx_pixel_put(map->mlx, map->win, rx, ry-5, RGB_YELLOW);
 		//mlx_pixel_put(map->mlx, map->win, rx, ry, RGB_YELLOW);
 	}
@@ -475,8 +490,8 @@ void mlx_create(t_map *map)
 					map->wall, x * 64, y * 64);
 			else if (map->map[y][x] == 'N')
 			{
-				map->pixels_x = (x * 64) + 32;
-				map->pixels_y = (y * 64) + 32;
+				map->pixels_x = (x * 64);
+				map->pixels_y = (y * 64);
 				draw_player(map, RGB_WHITE);
 				draw_ray(map, RGB_YELLOW);
 			}
