@@ -6,12 +6,12 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/08 22:55:18 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/08 23:16:12 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3d
-CC			= gcc #-fsanitize=address -g
+CC			= gcc -fsanitize=address -g
 CFLAGS		= -I/usr/include -Imlx_linux -O3
 SRC			= srcs/main.c \
 			srcs/parse/init.c \

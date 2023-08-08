@@ -8,17 +8,18 @@
 # define ROTATE_SPEED 0.01
 # define PLAYER_SPEED 0.1
 
-# define RGB_RED 0xFF0000
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
 # define RGB_YELLOW 0xFFFF00
-# define WALL '1'
-# define FLOOR '0'
-# define SPACE ' '
-# define NORTH 'N'
-# define EAST 'E'
-# define WEST 'W'
-# define SOUTH 'S'
+
+# define SPACE 32
+# define WALL 49
+# define FLOOR 48
+# define NORTH 78
+# define EAST 69
+# define WEST 87
+# define SOUTH 83
+
 # define W_KEY 119
 # define A_KEY 97
 # define S_KEY 115
@@ -48,22 +49,28 @@ typedef struct s_map		t_map;
 typedef struct s_ray		t_ray;
 typedef struct s_play		t_play;
 typedef struct s_texture	t_texture;
+typedef struct s_mlx		t_mlx;
 
 typedef struct s_map
 {
 	char			**map;
-	void			*mlx_ptr;
-	void			*win_ptr;
-	void			*img_ptr;
-	char			*address;
-	int				bits;
-	int				line_len;
-	int				end;
 	t_play			*play;
 	t_ray			*ray;
 	t_texture 		*texture;
 	t_data			*data;
+	t_mlx			*mlx;
 }			t_map;
+
+typedef struct s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_to_window;
+	char			*buffer;
+	int				a;
+	int				b;
+	int				c;
+}			t_mlx;
 
 typedef struct s_play
 {
@@ -101,6 +108,9 @@ typedef struct s_ray
 	int				draw_end;
 	int				tex_x;
 	int				tex_y;
+	int				bits;
+	int				line_len;
+	int				end;
 	unsigned int	color;
 }				t_ray;
 
