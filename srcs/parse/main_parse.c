@@ -3,11 +3,16 @@
 void arg_parse(t_data *data)
 {
 	int	x;
+	int	fd;
 
+	fd = open(data->argv[1], O_RDONLY);
+	if (fd == -1)
+		printf_error(data, "Invalid File map");
 	x = ft_strlen(data->argv[1]);
 	if ((data->argv[1][x -1] != 'b') || (data->argv[1][x - 2] != 'u') || \
 		(data->argv[1][x - 3] != 'c') || (data->argv[1][x - 4] != '.'))
 		printf_error(data, "The map must be .cub");
+	close(fd);
 }
 
 void map_array_strings(t_data *data)
@@ -19,6 +24,7 @@ void map_array_strings(t_data *data)
 	int		x;
 
 	fd = open(data->argv[1], O_RDONLY);
+	i = 0;
 	while (i < 8)
 	{
 		b = get_next_line(fd);
@@ -76,6 +82,7 @@ void map_array(t_data *data)
 		}
 		data->arr++;
 	}
+	printf("%d\n", data->arr);
 	data->map = (char **)malloc(sizeof(char *) * (data->arr + 1));
 	close (fd);
 }
@@ -100,7 +107,19 @@ void map_check_char(t_data *data)
 				printf_error(data, "Map Contains Caracthers Not Allowed");
 			if (data->map[y][x] == NORTH || data->map[y][x] == SOUTH || \
 				data->map[y][x] == EAST || data->map[y][x] == WEST)
+			{
+				if (data->map[y][x] == NORTH)
+					data->direction = NORTH;
+				else if (data->map[y][x] == WEST)
+					data->direction = WEST;
+				else if (data->map[y][x] == EAST)
+					data->direction = EAST;
+				else
+					data->direction = SOUTH;
+				data->player_x = x;
+				data->player_y = y;
 				c++;
+			}
 			x++;
 		}
 		x = 0;
@@ -149,6 +168,7 @@ void map_boundaries(t_data *data)
 
 void main_parse(t_data *data)
 {
+	data->arr = 0;
 	arg_parse(data);  // Parsing Args
 	map_array(data);  // Parsing Path/RGB & Creation of the Map
 	map_array_strings(data); // Filling the Map

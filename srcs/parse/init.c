@@ -5,7 +5,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	map_rgb(t_data *data, t_texturedir *texture)
+void map_rgb(t_data *data, t_texture *texture)
 {
 	char *arr;
 
@@ -19,25 +19,54 @@ int	map_rgb(t_data *data, t_texturedir *texture)
 		ft_atoi(data->c_arr[1]), ft_atoi(data->c_arr[2]));
 }
 
-/*static void	init_character(t_character *character)
+void init_player(t_data *data, t_play *play)
 {
-	character->position_x = 0.0;
-	character->position_y = 0.0;
-	character->direction_x = 0.0;
-	character->direction_y = 0.0;
-}*/
+	play->pos_x = data->player_x;
+	play->pos_y = data->player_y;
+	if (data->direction == NORTH)
+	{
+		play->dir_x = 0;
+		play->dir_y = -1;
+		play->plane_x = -0.66;
+		play->plane_y = 0;
+	}
+	else if (data->direction == SOUTH)
+	{
+		play->dir_x = 0;
+		play->dir_y = 1;
+		play->plane_x = 0.66;
+		play->plane_y = 0;
+	}
+	else if (data->direction == WEST)
+	{
+		play->dir_x = -1;
+		play->dir_y = 0;
+		play->plane_x = 0;
+		play->plane_y = 0.66;
+	}
+	else
+	{
+		play->dir_x = 1;
+		play->dir_y = 0;
+		play->plane_x = 0;
+		play->plane_y = -0.66;
+	}
+}
 
-void	init_texturedir(t_data *data, t_texturedir *texture)
+void	init_textured(t_data *data, t_texture *texture)
 {
-	texture->n = data->no;
-	texture->s = data->so;
-	texture->w = data->we;
-	texture->e = data->ea;
+	texture->n = "./path_north";
+	texture->s = "./path_south";
+	texture->w = "./path_west";
+	texture->e = "./path_east";
 	map_rgb(data, texture);
 }
 
-void	init(t_data *data, t_texturedir *texture)
+void	init_structs(t_map *map)
 {
-	init_texturedir(data, texture);
-	//init_character(character);
+	map->texture = malloc(sizeof(t_texture));
+	map->play = malloc(sizeof(t_play));
+	map->ray = malloc(sizeof(t_ray));
+	init_textured(map->data, map->texture);
+	init_player(map->data, map->play);
 }

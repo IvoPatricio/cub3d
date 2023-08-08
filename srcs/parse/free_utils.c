@@ -46,9 +46,9 @@ void free_map(t_data *data)
         free(data->map);
         data->map = NULL;
     }
-
     free_rest(data);
 }
+
 void free_rest(t_data *data)
 {
     int i;
@@ -78,5 +78,18 @@ void free_rest(t_data *data)
         free(data->f_arr);
         data->f_arr = NULL;
     }
-    exit(0);
+}
+
+void free_structs_mlx(t_map *map)
+{
+    free_map(map->data);
+    if (map->data)
+        free(map->data);
+    if (map->ray)
+        free(map->ray);
+    if (map->play)
+        free(map->play);
+    if (map->texture)
+        free(map->texture);
+    exit (0);
 }

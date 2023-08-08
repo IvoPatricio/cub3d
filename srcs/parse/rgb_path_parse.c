@@ -48,14 +48,14 @@ void rgb_path_parse3(t_data *data)
 
 void rgb_path_parse2(t_data *data)
 {
-	if (ft_strncmp(data->no, "NO ./path\n", 10) != 0)
-		printf_error(data, "Invalid NO_Path");
-	if (ft_strncmp(data->so, "SO ./path\n", 10) != 0)
-		printf_error(data, "Invalid SO_Path");
-	if (ft_strncmp(data->we, "WE ./path\n", 10) != 0)
-		printf_error(data, "Invalid WE_Path");
-	if (ft_strncmp(data->ea, "EA ./path\n", 10) != 0)
-		printf_error(data, "Invalid EA_Path");
+	if (ft_strncmp(data->no, "NO ./path_north\n", 10) != 0)
+		printf_error(data, "Invalid North Path");
+	if (ft_strncmp(data->so, "SO ./path_south\n", 10) != 0)
+		printf_error(data, "Invalid South Path");
+	if (ft_strncmp(data->we, "WE ./path_west\n", 10) != 0)
+		printf_error(data, "Invalid West Path");
+	if (ft_strncmp(data->ea, "EA ./path_east\n", 10) != 0)
+		printf_error(data, "Invalid East Path");
 	if (ft_strncmp(data->f, "F ", 2) != 0)
 		printf_error(data, "Invalid Floor RGB");
 	if (ft_strncmp(data->c, "C ", 2) != 0)

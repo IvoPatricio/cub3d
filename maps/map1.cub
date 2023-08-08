@@ -1,15 +1,15 @@
-NO ./path
-SO ./path
-WE ./path
-EA ./path
+NO ./path_north
+SO ./path_south
+WE ./path_west
+EA ./path_east
 
 F 255,1,255
 C 255,0,0
 
-000000
 111111
-11N001
-110001
+100001
+100001
+110N01
 110101
 111111
 
