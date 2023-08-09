@@ -43,8 +43,8 @@ void printf_struct_map(t_map *map)
 	printf("map->play->dir_y:%f\n", map->play->dir_y);
 	printf("map->play->plane_x:%f\n", map->play->plane_x);
 	printf("map->play->plane_y:%f\n", map->play->plane_y);
-	printf("map->play->pos_x:%f\n", map->play->pos_x);
-	printf("map->play->pos_y:%f\n", map->play->pos_y);
+	printf("map->play->pos_x:%f\n", map->play->posX);
+	printf("map->play->pos_y:%f\n", map->play->posY);
 	printf("map->texture->e:%s\n", map->texture->e);
 	printf("map->texture->n:%s\n", map->texture->n);
 	printf("map->texture->s:%s\n", map->texture->s);

@@ -3,8 +3,8 @@
 # define BUFFER_SIZE 1
 
 // GAME SETTINGS //
-# define WINDOW_X 800
-# define WINDOW_Y 600
+# define WIN_X 800
+# define WIN_Y 640
 # define ROTATE_SPEED 0.01
 # define PLAYER_SPEED 0.1
 
@@ -54,6 +54,7 @@ typedef struct s_mlx		t_mlx;
 typedef struct s_map
 {
 	char			**map;
+	void			*aaa;
 	t_play			*play;
 	t_ray			*ray;
 	t_texture 		*texture;
@@ -67,6 +68,7 @@ typedef struct s_mlx
 	void			*win_ptr;
 	void			*img_to_window;
 	char			*buffer;
+	int				i;
 	int				a;
 	int				b;
 	int				c;
@@ -74,21 +76,22 @@ typedef struct s_mlx
 
 typedef struct s_play
 {
-	double			pos_x;
-	double			pos_y;
+	double			posX;
+	double			posY;
 	double			dir_x;
 	double			dir_y;
 	double			old_dir_x;
 	double			old_plane_x;
 	double			plane_x;
 	double			plane_y;
+	t_map			*map;
 }			t_play;
 
 typedef struct s_ray
 {
-	double			camera_x;
-	double			ray_dir_x;
-	double			ray_dir_y;
+	double			cameraX;
+	double			rayDirX;
+	double			rayDirY;
 	double			s_dist_x;
 	double			s_dist_y;
 	double			delt_dist_x;
@@ -97,8 +100,8 @@ typedef struct s_ray
 	double			wall_x;
 	double			step;
 	double			tex_pos;
-	int				map_x;
-	int				map_y;
+	int				mapX;
+	int				mapY;
 	int				step_x;
 	int				step_y;
 	int				hit;
@@ -170,6 +173,9 @@ char		**ft_split(char const *s, char c);
 void		free_map(t_data *data);
 void		free_rest(t_data *data);
 void		free_structs_mlx(t_map *map);
+void		struct_malloc_error(const void *random, size_t size);
+void		char_malloc_error(t_data *data, char *a);
+void		array_malloc_error(t_data *data, char **a);
 
 // printf_utils.c //
 void		printf_error(t_data *data, const char *str);

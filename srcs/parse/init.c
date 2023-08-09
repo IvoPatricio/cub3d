@@ -21,8 +21,8 @@ void map_rgb(t_data *data, t_texture *texture)
 
 void init_player(t_data *data, t_play *play)
 {
-	play->pos_x = data->player_x;
-	play->pos_y = data->player_y;
+	play->posX = data->player_x + 0.5;
+	play->posY = data->player_y + 0.5;
 	if (data->direction == NORTH)
 	{
 		play->dir_x = 0;
@@ -67,6 +67,9 @@ void	init_structs(t_map *map)
 	map->texture = malloc(sizeof(t_texture));
 	map->play = malloc(sizeof(t_play));
 	map->ray = malloc(sizeof(t_ray));
+	map->mlx = malloc(sizeof(t_mlx));
+	map->map = map->data->map;
+	map->map[map->data->player_y][map->data->player_x] = '0';
 	init_textured(map->data, map->texture);
 	init_player(map->data, map->play);
 }
