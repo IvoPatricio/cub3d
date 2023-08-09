@@ -41,7 +41,7 @@
 # include<math.h>
 # include<stdbool.h>
 
-# include "../srcs/parse/get_next_line/get_next_line.h"
+# include "../srcs/utils/get_next_line/get_next_line.h"
 # include "../mini-linux/mlx.h"
 
 typedef struct s_data		t_data;
@@ -92,28 +92,22 @@ typedef struct s_ray
 	double			cameraX;
 	double			rayDirX;
 	double			rayDirY;
-	double			s_dist_x;
-	double			s_dist_y;
-	double			delt_dist_x;
-	double			delt_dist_y;
-	double			perp_wall_dist;
-	double			wall_x;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			sideDistX;
+	double			sideDistY;
+	double			walldist;
+	double			wallhit;
 	double			step;
-	double			tex_pos;
 	int				mapX;
 	int				mapY;
-	int				step_x;
-	int				step_y;
+	int				stepx;
+	int				stepy;
 	int				hit;
 	int				side;
 	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				tex_x;
-	int				tex_y;
-	int				bits;
-	int				line_len;
-	int				end;
+	int				drawstart;
+	int				drawend;
 	unsigned int	color;
 }				t_ray;
 
@@ -141,6 +135,7 @@ typedef struct s_texture
 	char			*s;
 	char			*w;
 	char			*e;
+	char			p_text;
 	int				roof;
 	int				floor;
 }			t_texture;
@@ -173,8 +168,8 @@ char		**ft_split(char const *s, char c);
 void		free_map(t_data *data);
 void		free_rest(t_data *data);
 void		free_structs_mlx(t_map *map);
-void		struct_malloc_error(const void *random, size_t size);
-void		char_malloc_error(t_data *data, char *a);
+void		struct_malloc_error(t_map *map, const void *random, size_t size);
+void		string_malloc_error(t_data *data, char *a);
 void		array_malloc_error(t_data *data, char **a);
 
 // printf_utils.c //

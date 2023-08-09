@@ -59,15 +59,27 @@ void	init_textured(t_data *data, t_texture *texture)
 	texture->s = "./path_south";
 	texture->w = "./path_west";
 	texture->e = "./path_east";
+	if (data->direction == NORTH)
+		texture->p_text = data->direction;
+	else if (data->direction == SOUTH)
+		texture->p_text = data->direction;
+	else if (data->direction == WEST)
+		texture->p_text = data->direction;
+	else
+		texture->p_text = data->direction;
 	map_rgb(data, texture);
 }
 
 void	init_structs(t_map *map)
 {
 	map->texture = malloc(sizeof(t_texture));
+	struct_malloc_error(map, map->texture, sizeof(map->texture));
 	map->play = malloc(sizeof(t_play));
+	struct_malloc_error(map, map->play, sizeof(map->play));
 	map->ray = malloc(sizeof(t_ray));
+	struct_malloc_error(map, map->ray, sizeof(map->ray));
 	map->mlx = malloc(sizeof(t_mlx));
+	struct_malloc_error(map, map->mlx, sizeof(map->mlx));
 	map->map = map->data->map;
 	map->map[map->data->player_y][map->data->player_x] = '0';
 	init_textured(map->data, map->texture);

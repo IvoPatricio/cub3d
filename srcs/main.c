@@ -97,23 +97,26 @@ void draw_floor_roof(t_map *map, int x)
 	y = 0;
 	while (y < WIN_Y)
 	{
-		if (y < map->ray->draw_start)
+		if (y < map->ray->drawstart)
 			my_mlx_pixel_put(map->mlx, x, y, map->texture->roof);
-		else if (y >= map->ray->draw_end)
+		else if (y >= map->ray->drawend)
 			my_mlx_pixel_put(map->mlx, x, y, map->texture->floor);
 		y++;
 	}
 }
 
-void print_raycast(int x, t_map *map)
+void print_raycast(int i, t_map *map)
 {
-	if (map->ray->side == 0)
-		map->ray->wall_x = map->play->posY + map->ray->perp_wall_dist * map->ray->rayDirY;
+	t_ray	*ray;
+
+	ray = map->ray;
+	if (ray->side == 0)
+		ray->wallhit = map->play->posY + ray->walldist * ray->rayDirY;
 	else
-		map->ray->wall_x = map->play->posX + map->ray->perp_wall_dist * map->ray->rayDirX;
-	map->ray->wall_x -= floor(map->ray->wall_x);
+		ray->wallhit = map->play->posX + ray->walldist * ray->rayDirX;
+	ray->wallhit -= floor(ray->wallhit);
 	//draw_textures_on_walls(map, x);
-	draw_floor_roof(map, x);
+	draw_floor_roof(map, i);
 }
 
 void raycast_dda(t_map *map)
@@ -124,31 +127,31 @@ void raycast_dda(t_map *map)
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->s_dist_x < ray->s_dist_y)
+		if (ray->sideDistX < ray->sideDistY)
 		{
-			ray->s_dist_x += ray->delt_dist_x;
-			ray->mapX += ray->step_x;
+			ray->sideDistX += ray->deltaDistX;
+			ray->mapX += ray->stepx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->s_dist_y += ray->delt_dist_y;
-			ray->mapY += ray->step_y;
+			ray->sideDistY += ray->deltaDistY;
+			ray->mapY += ray->stepy;
 			ray->side = 1;
 		}
 		if (map->map[ray->mapY][ray->mapX] == WALL)
 			ray->hit = 1;
 		if (ray->side == 0)
-			ray->perp_wall_dist = ray->s_dist_x - ray->delt_dist_x;
+			ray->walldist = ray->sideDistX - ray->deltaDistX;
 		else
-			ray->perp_wall_dist =  ray->s_dist_y - ray->delt_dist_y;
-		ray->line_height = (int)(WIN_Y / ray->perp_wall_dist);
-		ray->draw_start = -ray->line_height / 2 + WIN_Y / 2;
-		if (ray->draw_start < 0)
-			ray->draw_start = 0;
-		ray->draw_end = ray->line_height / 2 + WIN_Y / 2;
-		if (ray->draw_end >=  WIN_Y)
-			ray->draw_end = WIN_Y - 1;
+			ray->walldist =  ray->sideDistY - ray->deltaDistY;
+		ray->line_height = (int)(WIN_Y / ray->walldist);
+		ray->drawstart = -ray->line_height / 2 + WIN_Y / 2;
+		if (ray->drawstart < 0)
+			ray->drawstart = 0;
+		ray->drawend = ray->line_height / 2 + WIN_Y / 2;
+		if (ray->drawend >=  WIN_Y)
+			ray->drawend = WIN_Y - 1;
 	}
 }
 
@@ -159,23 +162,23 @@ void raycast_2(t_map *map)
 	ray = map->ray;
 	if (ray->rayDirX < 0)
 	{
-		ray->step_x = -1;
-		ray->s_dist_x = (map->play->posX - ray->mapX) * ray->delt_dist_x;
+		ray->stepx = -1;
+		ray->sideDistX = (map->play->posX - ray->mapX) * ray->deltaDistX;
 	}
 	else
 	{
-		ray->step_x = 1;
-		ray->s_dist_x = (ray->mapX + 1.0 - map->play->posX) * ray->delt_dist_x;
+		ray->stepx = 1;
+		ray->sideDistX = (ray->mapX + 1.0 - map->play->posX) * ray->deltaDistX;
 	}
 	if (ray->rayDirY < 0)
 	{
-		ray->step_y = -1;
-		ray->s_dist_y = (map->play->posY - ray->mapY) * ray->delt_dist_y;
+		ray->stepy = -1;
+		ray->sideDistY = (map->play->posY - ray->mapY) * ray->deltaDistY;
 	}
 	else
 	{
-		ray->step_x = 1;
-		ray->s_dist_y = (ray->mapY + 1.0 - map->play->posY) * ray->delt_dist_y;
+		ray->stepx = 1;
+		ray->sideDistY = (ray->mapY + 1.0 - map->play->posY) * ray->deltaDistY;
 	}
 	raycast_dda(map);
 }
@@ -183,24 +186,24 @@ void raycast_2(t_map *map)
 void raycast(t_map *map)
 {
 	t_ray	*ray;
-	int	x;
+	int		i;
 
-	x = 0;
+	i = 0;
 	ray = map->ray;
-	while (x < WIN_X)
+	while (i < WIN_X)
 	{
-		ray->cameraX = 2 * x /(double)WIN_X-1;
+		ray->cameraX = 2 * i /(double)WIN_X-1;
 		ray->rayDirX = map->play->dir_x + map->play->plane_x * ray->cameraX;
 		ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
 		ray->mapX = (int)map->play->posX;
 		ray->mapY = (int)map->play->posY;
-		ray->delt_dist_x = sqrt(1 + (ray->rayDirY* ray->rayDirY) \
+		ray->deltaDistX = sqrt(1 + (ray->rayDirY* ray->rayDirY) \
 			/ (ray->rayDirX * ray->rayDirX));
-		ray->delt_dist_y = sqrt(1 + (ray->rayDirX * ray->rayDirX) \
+		ray->deltaDistY = sqrt(1 + (ray->rayDirX * ray->rayDirX) \
 			/ (ray->rayDirY * ray->rayDirY));
 		raycast_2(map);
-		print_raycast(x, map);
-		x++;
+		print_raycast(i, map);
+		i++;
 	}
 }
 
@@ -250,11 +253,12 @@ void ft_mlx_init(t_map *map)
 
 int	main(int argc, char **argv)
 {
-	t_map			map;
+	t_map	map;
 
 	if (argc == 2)
 	{
 		map.data = malloc(sizeof(t_data));
+		struct_malloc_error(&map, map.data, sizeof(map.data));
 		map.data->argv = argv;
 		main_parse(map.data);
 		init_structs(&map);

@@ -39,6 +39,7 @@ void map_array_strings(t_data *data)
 		x = 0;
 		i = ft_strlen(b);
 		data->map[y] = (char *)malloc(sizeof(char) * (i + 1));
+		string_malloc_error(data, data->map[y]);
 		while (b[x])
 		{
 			data->map[y][x] = b[x];
@@ -82,8 +83,8 @@ void map_array(t_data *data)
 		}
 		data->arr++;
 	}
-	printf("%d\n", data->arr);
 	data->map = (char **)malloc(sizeof(char *) * (data->arr + 1));
+	array_malloc_error(data, data->map);
 	close (fd);
 }
 
@@ -169,14 +170,12 @@ void map_boundaries(t_data *data)
 void main_parse(t_data *data)
 {
 	data->arr = 0;
-	arg_parse(data);  // Parsing Args
-	map_array(data);  // Parsing Path/RGB & Creation of the Map
-	map_array_strings(data); // Filling the Map
-	map_check_char(data); // Checking the Caracthers inside of the Map
+	arg_parse(data);
+	map_array(data);
+	map_array_strings(data);
+	map_check_char(data);
 
 	//map_boundaries(data); Usless function, map isnt being parsed correctly for closed map while considering the spaces
-
-    // Just checking the values of stuff //
-    printf_paths(data); 
+    //printf_paths(data); 
 	printf_map(data);
 }

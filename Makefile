@@ -6,7 +6,7 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/09 03:40:45 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/09 04:57:45 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,16 @@ NAME		= cub3d
 CC			= gcc -fsanitize=address -g
 CFLAGS		= -I/usr/include -Imlx_linux -O3
 SRC			= srcs/main.c \
-			srcs/parse/init.c \
 			srcs/parse/main_parse.c \
-			srcs/parse/ft_split.c \
-			srcs/parse/parse_utils.c \
-			srcs/parse/printf_utils.c \
-			srcs/parse/free_utils.c \
 			srcs/parse/rgb_path_parse.c \
-			srcs/parse/get_next_line/get_next_line.c \
-			srcs/parse/get_next_line/get_next_line_utils.c
+			srcs/parse/init.c \
+			srcs/utils/ft_split.c \
+			srcs/utils/utils_malloc.c \
+			srcs/utils/utils_parse.c \
+			srcs/utils/utils_printf.c \
+			srcs/utils/utils_free.c \
+			srcs/utils/get_next_line/get_next_line.c \
+			srcs/utils/get_next_line/get_next_line_utils.c
 OBJ			= $(SRC:.c=.o)
 MLX_PATH	= ./mini-linux
 
