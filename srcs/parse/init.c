@@ -28,7 +28,7 @@ void init_player(t_data *data, t_play *play)
 		printf("-----------NORTH-----------\n\n");
 		play->dir_x = 0;
 		play->dir_y = -1;
-		play->plane_x = -0.66;
+		play->plane_x = 0.66;
 		play->plane_y = 0;
 	}
 	else if (data->direction == SOUTH)
@@ -42,7 +42,7 @@ void init_player(t_data *data, t_play *play)
 	else if (data->direction == EAST)
 	{
 		printf("-----------EAST-----------\n\n");
-		play->dir_x = -1;
+		play->dir_x = 1;
 		play->dir_y = 0;
 		play->plane_x = 0;
 		play->plane_y = 0.66;
@@ -50,7 +50,7 @@ void init_player(t_data *data, t_play *play)
 	else if (data->direction == WEST)
 	{
 		printf("-----------WEST-----------\n\n");
-		play->dir_x = 1;
+		play->dir_x = -1;
 		play->dir_y = 0;
 		play->plane_x = 0;
 		play->plane_y = -0.66;

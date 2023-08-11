@@ -303,9 +303,9 @@ int	ft_keys(int key_code, t_map *map)
 	if (key_code == D_KEY)
 		ft_key_d(map, key_code);
 	if (key_code == RIGHT)
-		ft_key_angle(map, -(double)ROTATE_SPEED);
-	if (key_code == LEFT)
 		ft_key_angle(map, (double)ROTATE_SPEED);
+	if (key_code == LEFT)
+		ft_key_angle(map, -(double)ROTATE_SPEED);
 	raydrawing(map);
 	return (0);
 }
