@@ -5,7 +5,7 @@
 // GAME SETTINGS //
 # define WIN_X 800
 # define WIN_Y 640
-# define ROTATE_SPEED 0.01
+# define ROTATE_SPEED 0.2
 # define PLAYER_SPEED 0.1
 
 # define RGB_WHITE 0xFFFFFF
@@ -108,7 +108,6 @@ typedef struct s_ray
 	int				line_height;
 	int				drawstart;
 	int				drawend;
-	unsigned int	color;
 }				t_ray;
 
 typedef struct s_data

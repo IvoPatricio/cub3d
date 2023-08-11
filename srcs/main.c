@@ -7,31 +7,10 @@ int ft_destroyer(t_map *map)
 	mlx_destroy_display(map->mlx->mlx_ptr);
 	free(map->mlx->mlx_ptr);
 	free_structs_mlx(map);
+	exit(1);
 }
 
-void	move_player_right_left(t_map *map, int key_code)
-{
-	if (key_code == A_KEY)
-	{
-		if ((map->map[(int)map->play->posY][(int)(map->play->posX - \
-					map->play->plane_x * PLAYER_SPEED)]) == '0')
-			map->play->posX -= map->play->plane_x * PLAYER_SPEED;
-		if (map->map[(int)(map->play->posY - map->play->plane_y * \
-					PLAYER_SPEED)][(int)map->play->posX] == '0')
-			map->play->posY -= map->play->plane_y * PLAYER_SPEED;
-	}
-	if (key_code == D_KEY)
-	{
-		if ((map->map[(int)map->play->posY][(int)(map->play->posX + \
-					map->play->plane_x * PLAYER_SPEED)]) == '0')
-			map->play->posX += map->play->plane_x * PLAYER_SPEED;
-		if (map->map[(int)(map->play->posY + map->play->plane_y * \
-					PLAYER_SPEED)][(int)map->play->posX] == '0')
-			map->play->posY += map->play->plane_y * PLAYER_SPEED;
-	}
-}
-
-void	move_player_up_down(t_map *map, int key_code)
+void ft_key_w(t_map *map, int key_code)
 {
 	if (key_code == W_KEY)
 	{
@@ -42,6 +21,10 @@ void	move_player_up_down(t_map *map, int key_code)
 					(double)PLAYER_SPEED)][(int)map->play->posX] == '0')
 			map->play->posY += map->play->dir_y * (double)PLAYER_SPEED;
 	}
+}
+
+void ft_key_s(t_map *map, int key_code)
+{
 	if (key_code == S_KEY)
 	{
 		if (map->map[(int)map->play->posY][(int)(map->play->posX - \
@@ -53,7 +36,33 @@ void	move_player_up_down(t_map *map, int key_code)
 	}
 }
 
-void	rotate_player_view(t_play *play, double rotate)
+void ft_key_a(t_map *map, int key_code)
+{
+	if (key_code == A_KEY)
+	{
+		if ((map->map[(int)map->play->posY][(int)(map->play->posX - \
+					map->play->plane_x * PLAYER_SPEED)]) == '0')
+			map->play->posX -= map->play->plane_x * PLAYER_SPEED;
+		if (map->map[(int)(map->play->posY - map->play->plane_y * \
+					PLAYER_SPEED)][(int)map->play->posX] == '0')
+			map->play->posY -= map->play->plane_y * PLAYER_SPEED;
+	}
+}
+
+void ft_key_d(t_map *map, int key_code)
+{
+	if (key_code == D_KEY)
+	{
+		if ((map->map[(int)map->play->posY][(int)(map->play->posX + \
+					map->play->plane_x * PLAYER_SPEED)]) == '0')
+			map->play->posX += map->play->plane_x * PLAYER_SPEED;
+		if (map->map[(int)(map->play->posY + map->play->plane_y * \
+					PLAYER_SPEED)][(int)map->play->posX] == '0')
+			map->play->posY += map->play->plane_y * PLAYER_SPEED;
+	}
+}
+
+void ft_key_angle(t_play *play, double rotate)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -90,7 +99,37 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-void draw_floor_roof(t_map *map, int x)
+void	draw_texture(t_map *map, int x, int color)
+{
+	int	y;
+
+	y = map->ray->drawstart;
+	while (y < map->ray->drawend)
+	{
+		my_mlx_pixel_put(map->mlx, x, y, color);
+		y++;
+	}
+}
+
+void	draw_walls(t_map *map, int x)
+{
+	if (map->ray->side == 1)
+	{
+		if (map->ray->stepy < 0)
+			draw_texture(map, x, 0xFF0000);
+		else 
+			draw_texture(map, x, 0x00FF00);
+	}
+	if (map->ray->side == 0)
+	{
+		if (map->ray->stepx < 0)
+			draw_texture(map, x, 0x0000FF);
+		else 
+			draw_texture(map, x, 0x000000);
+	}
+}
+
+void draw_background(t_map *map, int x)
 {
 	int	y;
 
@@ -103,20 +142,6 @@ void draw_floor_roof(t_map *map, int x)
 			my_mlx_pixel_put(map->mlx, x, y, map->texture->floor);
 		y++;
 	}
-}
-
-void print_raycast(int i, t_map *map)
-{
-	t_ray	*ray;
-
-	ray = map->ray;
-	if (ray->side == 0)
-		ray->wallhit = map->play->posY + ray->walldist * ray->rayDirY;
-	else
-		ray->wallhit = map->play->posX + ray->walldist * ray->rayDirX;
-	ray->wallhit -= floor(ray->wallhit);
-	//draw_textures_on_walls(map, x);
-	draw_floor_roof(map, i);
 }
 
 void raycast_dda(t_map *map)
@@ -153,6 +178,11 @@ void raycast_dda(t_map *map)
 		if (ray->drawend >=  WIN_Y)
 			ray->drawend = WIN_Y - 1;
 	}
+	if (ray->side == 0)
+		ray->wallhit = map->play->posY + ray->walldist * ray->rayDirY;
+	else
+		ray->wallhit = map->play->posX + ray->walldist * ray->rayDirX;
+	ray->wallhit -= floor(ray->wallhit);
 }
 
 void raycast_2(t_map *map)
@@ -183,28 +213,37 @@ void raycast_2(t_map *map)
 	raycast_dda(map);
 }
 
-void raycast(t_map *map)
+void raycast_1(t_map *map, int i)
 {
 	t_ray	*ray;
-	int		i;
 
-	i = 0;
 	ray = map->ray;
-	while (i < WIN_X)
+	ray->cameraX = 2 * i /(double)WIN_X-1;
+	ray->rayDirX = map->play->dir_x + map->play->plane_x * ray->cameraX;
+	ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
+	ray->mapX = (int)map->play->posX;
+	ray->mapY = (int)map->play->posY;
+	ray->deltaDistX = sqrt(1 + (ray->rayDirY* ray->rayDirY) \
+		/ (ray->rayDirX * ray->rayDirX));
+	ray->deltaDistY = sqrt(1 + (ray->rayDirX * ray->rayDirX) \
+		/ (ray->rayDirY * ray->rayDirY));
+	raycast_2(map);
+}
+
+void raydrawing(t_map *map)
+{
+	int x;
+
+	x = 0;
+	while (x < WIN_X)
 	{
-		ray->cameraX = 2 * i /(double)WIN_X-1;
-		ray->rayDirX = map->play->dir_x + map->play->plane_x * ray->cameraX;
-		ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
-		ray->mapX = (int)map->play->posX;
-		ray->mapY = (int)map->play->posY;
-		ray->deltaDistX = sqrt(1 + (ray->rayDirY* ray->rayDirY) \
-			/ (ray->rayDirX * ray->rayDirX));
-		ray->deltaDistY = sqrt(1 + (ray->rayDirX * ray->rayDirX) \
-			/ (ray->rayDirY * ray->rayDirY));
-		raycast_2(map);
-		print_raycast(i, map);
-		i++;
+		raycast_1(map, x);
+		draw_background(map, x);
+		draw_walls(map, x);
+		x++;
 	}
+	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr, \
+		map->mlx->img_to_window, 0, 0);
 }
 
 int	ft_keys(int key_code, t_map *map)
@@ -212,17 +251,19 @@ int	ft_keys(int key_code, t_map *map)
 	map->mlx->i = 1;
 	if (key_code == CLOSE)
 		ft_destroyer(map);
-	if (key_code == W_KEY || key_code == S_KEY)
-		move_player_up_down(map, key_code);
-	if (key_code == A_KEY || key_code == D_KEY)
-		move_player_right_left(map, key_code);
+	if (key_code == W_KEY)
+		ft_key_w(map, key_code);
+	if (key_code == S_KEY)
+		ft_key_s(map, key_code);
+	if (key_code == A_KEY)
+		ft_key_a(map, key_code);
+	if (key_code == D_KEY)
+		ft_key_d(map, key_code);
 	if (key_code == RIGHT)
-		rotate_player_view(map->play, (double)-ROTATE_SPEED);
+		ft_key_angle(map->play, (double)-ROTATE_SPEED);
 	if (key_code == LEFT)
-		rotate_player_view(map->play, (double)ROTATE_SPEED);
-	raycast(map);
-	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr, \
-		map->mlx->img_to_window, 0, 0);
+		ft_key_angle(map->play, (double)ROTATE_SPEED);
+	raydrawing(map);
 	return (0);
 }
 
@@ -237,16 +278,13 @@ void ft_mlx_init(t_map *map)
 			&map->mlx->b, &map->mlx->c);
 		if (!map->mlx->buffer)
 		{
-			
+			printf("Error\nMlx_Buffer Allocation Failed");
 			free_structs_mlx(map);
 		}
-		raycast(map);
-		mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr, \
-			map->mlx->img_to_window, 0, 0);
-		mlx_do_key_autorepeaton(map->mlx->mlx_ptr);
+		raydrawing(map);
 		mlx_hook(map->mlx->win_ptr, 2, 1, ft_keys, map);
-		mlx_hook(map->mlx->win_ptr, 33, (1L << 17), ft_destroyer, map);
 		mlx_hook(map->mlx->win_ptr, 17, 1L << 17, ft_destroyer, map);
+		mlx_hook(map->mlx->win_ptr, 33, 1L << 17, ft_destroyer, map);
 		mlx_loop(map->mlx->mlx_ptr);
 	}
 }
