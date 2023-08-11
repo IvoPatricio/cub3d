@@ -176,6 +176,7 @@ void		printf_error(t_data *data, const char *str);
 void		printf_map(t_data *data);
 void		printf_paths(t_data *data);
 void		printf_struct_map(t_map *map);
+void 		printf_struct_player(t_play *play);
 
 // rgb_path_parse.c //
 void 		rgb_path_parse1(t_data *data, char *b, int i);

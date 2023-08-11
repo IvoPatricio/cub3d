@@ -25,6 +25,7 @@ void init_player(t_data *data, t_play *play)
 	play->posY = data->player_y + 0.5;
 	if (data->direction == NORTH)
 	{
+		printf("-----------NORTH-----------\n\n");
 		play->dir_x = 0;
 		play->dir_y = -1;
 		play->plane_x = -0.66;
@@ -32,20 +33,23 @@ void init_player(t_data *data, t_play *play)
 	}
 	else if (data->direction == SOUTH)
 	{
+		printf("-----------SOUTH-----------\n\n");
 		play->dir_x = 0;
 		play->dir_y = 1;
 		play->plane_x = 0.66;
 		play->plane_y = 0;
 	}
-	else if (data->direction == WEST)
+	else if (data->direction == EAST)
 	{
+		printf("-----------EAST-----------\n\n");
 		play->dir_x = -1;
 		play->dir_y = 0;
 		play->plane_x = 0;
 		play->plane_y = 0.66;
 	}
-	else
+	else if (data->direction == WEST)
 	{
+		printf("-----------WEST-----------\n\n");
 		play->dir_x = 1;
 		play->dir_y = 0;
 		play->plane_x = 0;
@@ -60,13 +64,13 @@ void	init_textured(t_data *data, t_texture *texture)
 	texture->w = "./path_west";
 	texture->e = "./path_east";
 	if (data->direction == NORTH)
-		texture->p_text = data->direction;
+		texture->p_text = NORTH;
 	else if (data->direction == SOUTH)
-		texture->p_text = data->direction;
-	else if (data->direction == WEST)
-		texture->p_text = data->direction;
-	else
-		texture->p_text = data->direction;
+		texture->p_text = SOUTH;
+	else if (data->direction == EAST)
+		texture->p_text = EAST;
+	else if ((data->direction == WEST))
+		texture->p_text = WEST;
 	map_rgb(data, texture);
 }
 

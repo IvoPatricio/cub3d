@@ -115,7 +115,7 @@ void map_check_char(t_data *data)
 					data->direction = WEST;
 				else if (data->map[y][x] == EAST)
 					data->direction = EAST;
-				else
+				else if ((data->map[y][x] == SOUTH))
 					data->direction = SOUTH;
 				data->player_x = x;
 				data->player_y = y;
@@ -176,6 +176,5 @@ void main_parse(t_data *data)
 	map_check_char(data);
 
 	//map_boundaries(data); Usless function, map isnt being parsed correctly for closed map while considering the spaces
-    //printf_paths(data); 
 	printf_map(data);
 }

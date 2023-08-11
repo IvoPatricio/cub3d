@@ -51,3 +51,17 @@ void printf_struct_map(t_map *map)
 	printf("--------------------------\n");
 
 }
+
+void printf_struct_player(t_play *play)
+{
+	printf("\n\n---------------\n\n");
+	printf("%fplay->dir_x\n", play->dir_x);
+	printf("%fplay->dir_y\n", play->dir_y);
+	printf("%fplay->old_dir_x\n", play->old_dir_x);
+	printf("%fplay->old_plane_x\n", play->old_plane_x);
+	printf("%fplay->plane_x\n", play->plane_x);
+	printf("%fplay->plane_y\n", play->plane_y);
+	printf("%fplay->posX\n", play->posX);
+	printf("%fplay->posY\n", play->posY);
+	printf("\n\n---------------\n\n");
+}
