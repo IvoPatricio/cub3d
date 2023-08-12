@@ -134,7 +134,7 @@ typedef struct s_texture
 	char			*s;
 	char			*w;
 	char			*e;
-	char			p_text;
+	char			player_direction;
 	int				roof;
 	int				floor;
 }			t_texture;

@@ -113,7 +113,6 @@ void ft_key_angle(t_map *map, double rotate)
 	double	old_plane_x;
 
 	play = map->play;
-	printf_struct_player(play);
 	old_dir_x = play->dir_x;
 	play->dir_x = play->dir_x * cos(rotate) - play->dir_y * sin(rotate);
 	play->dir_y = old_dir_x * sin(rotate) + play->dir_y * cos(rotate);
@@ -145,21 +144,23 @@ void	draw_texture(t_map *map, int x, int color)
 
 void	draw_walls(t_map *map, int x)
 {
-	draw_texture(map, x, 0x0000FF);
-	/*if (map->ray->side == 1)
+	//side = 1 vertical WALLS
+	//stepY think of it was TAN
+	if (map->ray->side == 1)
 	{
-		if (map->ray->stepy  == -1)
-			draw_texture(map, x, 0xFF0000);
-		else 
-			draw_texture(map, x, 0x00FF00);
+		//draw_texture(map, x, 0xFF0000);
+		if (map->ray->stepy > 0)
+			draw_texture(map, x, 0x00FF00); // NORTH WALL
+		else
+			draw_texture(map, x, 0xFF0000); // SOUTH WALL
 	}
-	if (map->ray->side == 0)
+	else if (map->ray->side == 0)
 	{
-		if (map->ray->stepx == -1)
-			draw_texture(map, x, 0x0000FF);
+		if (map->ray->rayDirX < 0 && map->ray->stepx < 0)
+			draw_texture(map, x, 0x0000FF); //EAST WALL
 		else 
-			draw_texture(map, x, 0x000000);
-	}*/
+			draw_texture(map, x, 0x000000); //WEST WALL
+	}
 }
 
 void draw_background(t_map *map, int x)
@@ -169,9 +170,9 @@ void draw_background(t_map *map, int x)
 	y = 0;
 	while (y < (int)WIN_Y)
 	{
-		if (y < map->ray->drawstart)
+		if (y <= map->ray->drawstart)
 			ft_pixel_drawing(map->mlx, x, y, map->texture->roof);
-		else if (y > map->ray->drawend)
+		else if (y >= map->ray->drawend)
 			ft_pixel_drawing(map->mlx, x, y, map->texture->floor);
 		y++;
 	}
@@ -199,32 +200,28 @@ void raycast_dda(t_map *map)
 		}
 		if (map->map[ray->mapY][ray->mapX] == WALL)
 			ray->hit = 1;
-		if (ray->side == 0)
-		{
-			ray->walldist = ray->sideDistX - ray->deltaDistX;
-		}
-		else
-			ray->walldist =  ray->sideDistY - ray->deltaDistY;
-		
-		ray->line_height = (int)(WIN_Y / ray->walldist);
-
-		ray->drawstart = -ray->line_height / 2 + (int)WIN_Y / 2;
-		if (ray->drawstart < 0)
-			ray->drawstart = 0;
-
-		ray->drawend = ray->line_height / 2 + (int)WIN_Y / 2;
-		if (ray->drawend >=  (int)WIN_Y)
-			ray->drawend = (int)WIN_Y - 1;
 	}
+	if (ray->side == 0)
+	{
+		ray->walldist = ray->sideDistX - ray->deltaDistX;
+	}
+	else
+		ray->walldist =  ray->sideDistY - ray->deltaDistY;
+	ray->line_height = (int)(WIN_Y / ray->walldist);
+
+	ray->drawstart = -ray->line_height / 2 + (int)WIN_Y / 2;
+	if (ray->drawstart < 0)
+		ray->drawstart = 0;
+
+	ray->drawend = ray->line_height / 2 + (int)WIN_Y / 2;
+	if (ray->drawend >=  (int)WIN_Y)
+		ray->drawend = (int)WIN_Y - 1;
+
 	if (ray->side == 0)
 		ray->wallhit = map->play->posY + ray->walldist * ray->rayDirY;
 	else
 		ray->wallhit = map->play->posX + ray->walldist * ray->rayDirX;
 	ray->wallhit -= floor(ray->wallhit);
-	 //x coordinate on the texture
-    /*  int texX = int(wallX * double(texWidth));
-      if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-      if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1*/
 }
 
 void raycast_2(t_map *map)
@@ -249,7 +246,7 @@ void raycast_2(t_map *map)
 	}
 	else
 	{
-		ray->stepx = 1;
+		ray->stepy = 1;
 		ray->sideDistY = (ray->mapY + 1.0 - map->play->posY) * ray->deltaDistY;
 	}
 	raycast_dda(map);
@@ -265,12 +262,14 @@ void raycast_1(t_map *map, int i)
 	ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
 	ray->mapX = (int)map->play->posX;
 	ray->mapY = (int)map->play->posY;
-	//printf("MAP:X%d\n", ray->mapX);
-	//printf("MAP:Y%d\n", ray->mapY);
-	ray->deltaDistX = sqrt(1 + (ray->rayDirY* ray->rayDirY) \
-		/ (ray->rayDirX * ray->rayDirX));
-	ray->deltaDistY = sqrt(1 + (ray->rayDirX * ray->rayDirX) \
-		/ (ray->rayDirY * ray->rayDirY));
+	if (ray->rayDirX == 0)
+		ray->deltaDistX = 1e30;
+	else
+		ray->deltaDistX = fabs(1 / ray->rayDirX);
+	if (ray->rayDirY == 0)
+		ray->deltaDistY = 1e30;
+	else
+		ray->deltaDistY = fabs(1 / ray->rayDirY);
 	raycast_2(map);
 }
 
@@ -302,9 +301,15 @@ int	ft_keys(int key_code, t_map *map)
 		ft_key_a(map, key_code);
 	if (key_code == D_KEY)
 		ft_key_d(map, key_code);
-	if (key_code == RIGHT)
+	if (key_code == RIGHT && (map->data->direction == WEST || \
+		map->data->direction == EAST))
+		ft_key_angle(map, -(double)ROTATE_SPEED);
+	else if (key_code == RIGHT)
 		ft_key_angle(map, (double)ROTATE_SPEED);
-	if (key_code == LEFT)
+	if (key_code == LEFT && (map->data->direction == WEST || \
+		map->data->direction == EAST))
+		ft_key_angle(map, (double)ROTATE_SPEED);
+	else if (key_code == LEFT)
 		ft_key_angle(map, -(double)ROTATE_SPEED);
 	raydrawing(map);
 	return (0);

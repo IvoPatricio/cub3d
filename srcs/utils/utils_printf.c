@@ -47,7 +47,7 @@ void printf_struct_map(t_map *map)
 	printf("RGB-Texture->floor:%d\n", map->texture->floor);
 	printf("RGB-Texture->roof:%d\n\n", map->texture->roof);
 	printf("      \e[1;34mMAIN-TEXTURE:\033[0m%c\n", \
-		map->texture->p_text);
+		map->texture->player_direction);
 	printf("--------------------------\n");
 
 }
