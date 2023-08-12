@@ -186,11 +186,11 @@ char 		*give_mem_char(char *dest, char *src);
 
 // main_parse.c //
 void		main_parse(t_data *data);
-void		map_boundaries(t_data *data);
+void		arg_parse(t_data *data);
 void		map_check_char(t_data *data);
 void		map_array(t_data *data);
 void		map_array_strings(t_data *data);
-void		arg_parse(t_data *data);
+void 		map_flood_fill(t_data *data);
 
 // parse_utils.c //
 void		*ft_memset(void *b, int c, size_t len);

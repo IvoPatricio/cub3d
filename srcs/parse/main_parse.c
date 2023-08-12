@@ -167,6 +167,43 @@ void map_boundaries(t_data *data)
 
 }
 
+void map_flood_fill(t_data *data)
+{
+	int	x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (data->map[y])
+	{
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == '0' || data->map[y][x] == data->direction)
+			{
+				if (data->map[y + 1][x + 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y + 1][x - 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y + 1][x] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y - 1][x + 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y - 1][x - 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y - 1][x] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y][x + 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+				if (data->map[y][x - 1] == ' ')
+					printf_error(data, "Map Must Be Closed By Walls");
+			}
+			x++;
+		}
+		y++;
+		x = 0;
+	}
+}
+
 void main_parse(t_data *data)
 {
 	data->arr = 0;
@@ -174,7 +211,6 @@ void main_parse(t_data *data)
 	map_array(data);
 	map_array_strings(data);
 	map_check_char(data);
-
-	//map_boundaries(data); Usless function, map isnt being parsed correctly for closed map while considering the spaces
+	map_flood_fill(data);
 	printf_map(data);
 }
