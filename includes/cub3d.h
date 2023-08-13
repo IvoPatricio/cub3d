@@ -72,6 +72,8 @@ typedef struct s_mlx
 	int				a;
 	int				b;
 	int				c;
+	int				y;
+	int				x;
 }			t_mlx;
 
 typedef struct s_play
@@ -137,6 +139,10 @@ typedef struct s_texture
 	char			player_direction;
 	int				roof;
 	int				floor;
+	t_mlx			*north;
+	t_mlx			*south;
+	t_mlx			*east;
+	t_mlx			*west;
 }			t_texture;
 
 typedef struct s_character
