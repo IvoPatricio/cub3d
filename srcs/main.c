@@ -349,7 +349,7 @@ int	main(int argc, char **argv)
 		main_parse(map.data);
 		init_structs(&map);
 		printf_struct_map(&map);
-		//ft_mlx_init(&map);
+		ft_mlx_init(&map);
 		free_structs_mlx(&map);
 	}
 	else

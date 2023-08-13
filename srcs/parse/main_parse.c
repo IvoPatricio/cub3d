@@ -171,6 +171,10 @@ void map_flood_fill(t_data *data)
 {
 	int	x;
 	int y;
+	int dx[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+	int dy[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
+	int	i;
+	char c;
 
 	x = 0;
 	y = 0;
@@ -180,22 +184,16 @@ void map_flood_fill(t_data *data)
 		{
 			if (data->map[y][x] == '0' || data->map[y][x] == data->direction)
 			{
-				if (data->map[y + 1][x + 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y + 1][x - 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y + 1][x] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y - 1][x + 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y - 1][x - 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y - 1][x] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y][x + 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
-				if (data->map[y][x - 1] == ' ')
-					printf_error(data, "Map Must Be Closed By Walls");
+				i = 0;
+				while (i < 8)
+				{
+					if ((y + dy[i]) >= data->arr)
+						printf_error(data, "Map Must Be Closed By Walls");
+					c = data->map[y + dy[i]][x + dx[i]];
+    				if (c != '1' && c != '0' && c != data->direction)
+        				printf_error(data, "Map Must Be Closed By Walls");
+    				i++;
+				}
 			}
 			x++;
 		}
