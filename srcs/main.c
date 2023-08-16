@@ -373,6 +373,20 @@ void ft_mlx_init(t_map *map)
 	}
 }
 
+void init_data_null(t_data *data, char **argv)
+{
+	data->argv = argv;
+	data->f_arr = NULL;
+	data->c_arr = NULL;
+	data->f = NULL;
+	data->c = NULL;
+	data->no = NULL;
+	data->we = NULL;
+	data->so = NULL;
+	data->ea = NULL;
+	data->map = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	map;
@@ -381,16 +395,7 @@ int	main(int argc, char **argv)
 	{
 		map.data = malloc(sizeof(t_data));
 		struct_malloc_error(&map, map.data, sizeof(map.data));
-		map.data->argv = argv;
-		map.data->f_arr = NULL;
-		map.data->c_arr = NULL;
-		map.data->f = NULL;
-		map.data->c = NULL;
-		map.data->no = NULL;
-		map.data->we = NULL;
-		map.data->so = NULL;
-		map.data->ea = NULL;
-		map.data->map = NULL;
+		init_data_null(map.data, argv);
 		main_parse(map.data);
 		free_map(map.data);
 		//init_structs(&map);
