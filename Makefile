@@ -6,7 +6,7 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/11 18:23:50 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/16 02:20:51 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,11 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+
+r:
+	make re && valgrind --track-fds=yes ./cub3d maps/map1.cub
+
 
 .PHONY: all clean fclean re
 

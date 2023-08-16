@@ -5,21 +5,21 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void map_rgb(t_data *data, t_texture *texture)
+void	map_rgb(t_data *data, t_texture *texture)
 {
-	char *arr;
+	char	*arr;
 
 	arr = data->f_arr[0];
 	arr += 2;
-	texture->floor = create_trgb(0, ft_atoi(arr), \
-		ft_atoi(data->f_arr[1]), ft_atoi(data->f_arr[2]));
+	texture->floor = create_trgb(0, ft_atoi(arr), ft_atoi(data->f_arr[1]),
+		ft_atoi(data->f_arr[2]));
 	arr = data->c_arr[0];
 	arr += 2;
-	texture->roof = create_trgb(0, ft_atoi(arr), \
-		ft_atoi(data->c_arr[1]), ft_atoi(data->c_arr[2]));
+	texture->roof = create_trgb(0, ft_atoi(arr), ft_atoi(data->c_arr[1]),
+		ft_atoi(data->c_arr[2]));
 }
 
-void init_player(t_data *data, t_play *play)
+void	init_player(t_data *data, t_play *play)
 {
 	play->posX = data->player_x + 0.5;
 	play->posY = data->player_y + 0.5;

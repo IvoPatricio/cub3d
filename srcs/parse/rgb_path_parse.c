@@ -1,11 +1,11 @@
 #include "../../includes/cub3d.h"
 
-char *give_mem_char(char *dest, char *src)
+char	*give_mem_char(char *dest, char *src)
 {
 	int	len;
 	int	i;
 
-	len = ft_strlen(src); 
+	len = ft_strlen(src);
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest)
 	{
@@ -22,10 +22,10 @@ char *give_mem_char(char *dest, char *src)
 	return (dest);
 }
 
-void rgb_path_parse3(t_data *data)
+void	rgb_path_parse3(t_data *data)
 {
-    int		i;
-	char 	*arr;
+	int		i;
+	char	*arr;
 
 	arr = data->f_arr[0];
 	arr += 2;
@@ -46,7 +46,7 @@ void rgb_path_parse3(t_data *data)
 	}
 }
 
-void rgb_path_parse2(t_data *data)
+void	rgb_path_parse2(t_data *data)
 {
 	if (ft_strncmp(data->no, "NO ./path_north\n", 10) != 0)
 		printf_error(data, "Invalid North Path");
@@ -65,7 +65,7 @@ void rgb_path_parse2(t_data *data)
 	rgb_path_parse3(data);
 }
 
-void rgb_path_parse1(t_data *data, char *b, int i)
+void	rgb_path_parse1(t_data *data, char *b, int i)
 {
 	if (i == 0)
 		data->no = give_mem_char(data->no, b);

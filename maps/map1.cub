@@ -1,16 +1,12 @@
-NO ./path_north
-SO ./path_south
-WE ./path_west
-EA ./path_east
+NO ../../spries/east_wall.xpm
+SO ../../sprites/east_wall.xpm
+WE ../../sprites/east_wall.xpm
+EA ../../sprites/east_wall.xpm
 
 F 255,1,255
 C 255,0,0
 
-
-111111
-100001
-100001
-100001
-100001
-100N01
-111111
+1111
+1N01
+1001
+1111

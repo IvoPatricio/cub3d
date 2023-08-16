@@ -40,6 +40,7 @@
 # include<string.h>
 # include<math.h>
 # include<stdbool.h>
+# include<ctype.h>
 
 # include "../srcs/utils/get_next_line/get_next_line.h"
 # include "../mini-linux/mlx.h"

@@ -177,16 +177,16 @@ void	draw_walls(t_map *map, int x)
 	{
 		//draw_texture(map, x, 0xFF0000);
 		if (map->ray->stepy > 0)
-			draw_texture(map, x, 0xFF0000); // SOUTH WALL
+			draw_test(map, x); // SOUTH WALL
 		else
 			draw_test(map, x); // NORTH WALL
 	}
 	else if (map->ray->side == 0)
 	{
 		if (map->ray->rayDirX < 0 && map->ray->stepx < 0)
-			draw_texture(map, x, 0x0000FF); //EAST WALL
+			draw_test(map, x); //EAST WALL
 		else 
-			draw_texture(map, x, 0x000000); //WEST WALL
+			draw_test(map, x); //WEST WALL
 	}
 }
 
@@ -382,11 +382,12 @@ int	main(int argc, char **argv)
 		map.data = malloc(sizeof(t_data));
 		struct_malloc_error(&map, map.data, sizeof(map.data));
 		map.data->argv = argv;
-		main_parse(map.data);
-		init_structs(&map);
-		printf_struct_map(&map);
-		ft_mlx_init(&map);
-		free_structs_mlx(&map);
+		//main_parse(map.data);
+		free_map(map.data);
+		//init_structs(&map);
+		//printf_struct_map(&map);
+		//ft_mlx_init(&map);
+		//free_structs_mlx(&map);
 	}
 	else
 	{
