@@ -5,14 +5,19 @@ void	free_map(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->argv[i])
+	if (data->argv)
 	{
-		free(data->argv[i]);
-		i++;
+		while (data->argv[i])
+		{
+			free(data->argv[i]);
+			i++;
+		}
+		free(data->argv);
 	}
-	free(data->argv);
-    free(data);
-	// free_rest(data);
+	if (data->map)
+		free(data->map);
+	if (data)
+    	free(data);
 }
 
 void	free_structs_mlx(t_map *map)

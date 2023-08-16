@@ -129,6 +129,7 @@ typedef struct s_data
 	char		direction;
 	int			player_x;
 	int			player_y;
+	int			map_time;
 }			t_data;
 
 typedef struct s_texture

@@ -1,5 +1,17 @@
 #include "../../includes/cub3d.h"
 
+/*
+ * @brief function who returns the size of a string
+ * @param str ptr on char
+ * @return integer that defines lenght str
+int ft_strlen(char *str)
+{
+	int i =0;
+	while (str[i])
+		i++;
+	return i;
+}*/
+
 void	arg_parse(t_data *data)
 {
 	int	x;
@@ -119,7 +131,7 @@ void file_array(t_data *data)
 	close(fd);
 }
 
-char *ft_argv_str(t_data *data, char *str, int ind, int i)
+char *ft_isspace_file2(t_data *data, char *str, int ind, int i)
 {
 	int	x;
 
@@ -146,12 +158,14 @@ char *ft_argv_str(t_data *data, char *str, int ind, int i)
 	return (data->argv[ind]);
 }
 
-char *ft_argv_new(t_data *data, int ind)
+char *ft_isspace_file1(t_data *data, int ind, int z)
 {
 	char *str;
-	int	i = 2;
-	int	x = 0;
+	int	i;
+	int	x;
 
+	i = 0 + z;
+	x = 0;
 	while (data->argv[ind][i])
 	{
 		if (isspace(data->argv[ind][i]) != 0)
@@ -162,38 +176,92 @@ char *ft_argv_new(t_data *data, int ind)
 			i++;
 		}
 	}
-	i = 2;
+	i = 0 + z;
 	str = (char *)malloc(sizeof(char) * (x + 1));
-	return (ft_argv_str(data, str, ind, i));
+	return (ft_isspace_file2(data, str, ind, i));
+}
+
+char *ft_utils_add_values_data(t_data *data, int i, int value)
+{
+	data->map_time++;
+	return (ft_isspace_file1(data, i, value));
+}
+
+void ft_add_values_map(t_data *data, int i)
+{
+	int	x;
+
+	x = i;
+	data->arr = 0;
+	while (data->argv[x])
+		x++;
+	data->arr = x - i;
+	data->map = (char **)malloc(sizeof(char *) * (data->arr + 1));
+	x = 0;
+	while (data->argv[i])
+	{
+		data->map[x] = data->argv[i];
+		x++;
+		i++;
+	}
+	data->map[data->arr] = '\0';
+}
+
+void ft_add_values_data(t_data *data)
+{
+	int i;
+
+	i = 0;
+	data->map_time = 0;
+	while (data->argv[i] && data->map_time < 6)
+	{
+		ft_isspace_file1(data, i, 0);
+		if (strncmp(data->argv[i], "NO", 2) == 0)
+			data->no = ft_utils_add_values_data(data, i, 2);
+		else if (strncmp(data->argv[i], "SO", 2) == 0)
+			data->so = ft_utils_add_values_data(data, i, 2);
+		else if (strncmp(data->argv[i], "WE", 2) == 0)
+			data->we = ft_utils_add_values_data(data, i, 2);
+		else if (strncmp(data->argv[i], "EA", 2) == 0)
+			data->ea = ft_utils_add_values_data(data, i, 2);
+		else if (strncmp(data->argv[i], "F", 1) == 0)
+			data->f = ft_utils_add_values_data(data, i, 1);
+		else if (strncmp(data->argv[i], "C", 1) == 0)
+			data->c = ft_utils_add_values_data(data, i, 1);
+		i++;
+	}
+	ft_add_values_map(data, i);
+}
+
+int ft_path_utils(char *str)
+{
+	int fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		return -1;
+	close(fd);
+	return 0;
+}
+
+void ft_check_path(t_data *data)
+{
+	if (ft_path_utils(data->no) == -1)
+		printf_error(data, "Invalid North Path");
+	if (ft_path_utils(data->so) == -1)
+		printf_error(data, "Invalid South Path");
+	if (ft_path_utils(data->we) == -1)
+		printf_error(data, "Invalid West Path");
+	if (ft_path_utils(data->ea) == -1)
+		printf_error(data, "Invalid East Path");
 }
 
 void main_parse(t_data *data)
 {
-	data->arr = 0;
 	arg_parse(data);
 	file_array(data);
-	int fd;
-	int i = 0;
-	while (data->argv[i])
-	{
-		if (strncmp(data->argv[i], "NO ", 2) == 0)
-			data->no = ft_argv_new(data, i);
-		else if (strncmp(data->argv[i], "SO ", 2) == 0)
-			data->so = ft_argv_new(data, i);
-		else if (strncmp(data->argv[i], "WE ", 2) == 0)
-			data->we = ft_argv_new(data, i);
-		else if (strncmp(data->argv[i], "EA ", 2) == 0)
-			data->ea = ft_argv_new(data, i);
-		else if (strncmp(data->argv[i], "F ", 2) == 0)
-			data->f = ft_argv_new(data, i);
-		else if (strncmp(data->argv[i], "C ", 2) == 0)
-			data->c = ft_argv_new(data, i);
-		i++;
-	}
-	/*
-	fd = open(data->no, O_RDONLY);
-	if (fd == -1)
-		printf("PATH DOESNT EXIST%s\n", data->no);*/
+	ft_add_values_data(data);
+	ft_check_path(data);
 
 	printf("data->f%s\n", data->no);
 	printf("data->f%s\n", data->so);
@@ -201,7 +269,12 @@ void main_parse(t_data *data)
 	printf("data->f%s\n", data->ea);
 	printf("data->f%s\n", data->f);
 	printf("data->f%s\n", data->c);
-	//map_array_strings(data);
+	int i = 0;
+	while (data->map[i])
+	{
+		printf("%s", data->map[i]);
+		i++;
+	}
 	// map_check_char(data);
 	// map_flood_fill(data);
 	// printf_map(data);

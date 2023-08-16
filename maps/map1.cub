@@ -1,12 +1,17 @@
-NO ../../spries/east_wall.xpm
-SO ../../sprites/east_wall.xpm
-WE ../../sprites/east_wall.xpm
-EA ../../sprites/east_wall.xpm
+NO ./sprites/north_wall.xpm
+
+
+
+WE ./sprites/west_wall.xpm
+EA ./sprites/east_wall.xpm
 
 F 255,1,255
+
+
+SO ./sprites/south_wall.xpm
 C 255,0,0
 
-1111
-1N01
-1001
+ 111111
+11N011
+10011
 1111
