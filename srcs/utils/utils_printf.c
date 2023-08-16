@@ -2,8 +2,8 @@
 
 void printf_error(t_data *data, const char *str)
 {
-	printf("\e[1;31mERROR\n\e[0;0m");
-	printf("\e[0;34m%s\n\e[0;0m", str);
+	perror("\e[1;31mERROR");  
+	printf("\e[0;0m\e[0;34m%s\n\e[0;0m", str);
 	free_map(data);
 	exit(0);
 }
@@ -25,11 +25,12 @@ void printf_paths(t_data *data)
 {
 	int	i;
 
-	printf("%s", data->no);
-	printf("%s", data->so);
-	printf("%s", data->we);
-	printf("%s", data->ea);
+	printf("Path_North:%s\n", data->no);
+	printf("Path_South:%s\n", data->so);
+	printf("Path_West:%s\n", data->we);
+	printf("Path_East:%s\n", data->ea);
 	i = 0;
+	printf("-----RGB-----\n");
 	while (data->f_arr[i])
 		printf("%s\n", data->f_arr[i++]);
 	i = 0;

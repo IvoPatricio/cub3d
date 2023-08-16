@@ -382,6 +382,15 @@ int	main(int argc, char **argv)
 		map.data = malloc(sizeof(t_data));
 		struct_malloc_error(&map, map.data, sizeof(map.data));
 		map.data->argv = argv;
+		map.data->f_arr = NULL;
+		map.data->c_arr = NULL;
+		map.data->f = NULL;
+		map.data->c = NULL;
+		map.data->no = NULL;
+		map.data->we = NULL;
+		map.data->so = NULL;
+		map.data->ea = NULL;
+		map.data->map = NULL;
 		main_parse(map.data);
 		free_map(map.data);
 		//init_structs(&map);

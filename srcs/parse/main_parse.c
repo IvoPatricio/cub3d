@@ -19,11 +19,17 @@ void	arg_parse(t_data *data)
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd == -1)
+	{
+		data->argv = NULL;
 		printf_error(data, "Invalid File map");
+	}
 	x = ft_strlen(data->argv[1]);
 	if ((data->argv[1][x - 1] != 'b') || (data->argv[1][x - 2] != 'u')
 		|| (data->argv[1][x - 3] != 'c') || (data->argv[1][x - 4] != '.'))
+	{
+		data->argv = NULL;
 		printf_error(data, "The map must be .cub");
+	}
 	close(fd);
 }
 
@@ -216,13 +222,13 @@ void ft_add_values_data(t_data *data)
 	while (data->argv[i] && data->map_time < 6)
 	{
 		ft_isspace_file1(data, i, 0);
-		if (strncmp(data->argv[i], "NO", 2) == 0)
+		if (strncmp(data->argv[i], "NO./", 4) == 0)
 			data->no = ft_utils_add_values_data(data, i, 2);
-		else if (strncmp(data->argv[i], "SO", 2) == 0)
+		else if (strncmp(data->argv[i], "SO./", 4) == 0)
 			data->so = ft_utils_add_values_data(data, i, 2);
-		else if (strncmp(data->argv[i], "WE", 2) == 0)
+		else if (strncmp(data->argv[i], "WE./", 4) == 0)
 			data->we = ft_utils_add_values_data(data, i, 2);
-		else if (strncmp(data->argv[i], "EA", 2) == 0)
+		else if (strncmp(data->argv[i], "EA./", 4) == 0)
 			data->ea = ft_utils_add_values_data(data, i, 2);
 		else if (strncmp(data->argv[i], "F", 1) == 0)
 			data->f = ft_utils_add_values_data(data, i, 1);
@@ -231,6 +237,8 @@ void ft_add_values_data(t_data *data)
 		i++;
 	}
 	ft_add_values_map(data, i);
+	if (data->map_time < 6)
+		printf_error(data, "Invalid File Variables");
 }
 
 int ft_path_utils(char *str)
@@ -262,20 +270,9 @@ void main_parse(t_data *data)
 	file_array(data);
 	ft_add_values_data(data);
 	ft_check_path(data);
-
-	printf("data->f%s\n", data->no);
-	printf("data->f%s\n", data->so);
-	printf("data->f%s\n", data->we);
-	printf("data->f%s\n", data->ea);
-	printf("data->f%s\n", data->f);
-	printf("data->f%s\n", data->c);
-	int i = 0;
-	while (data->map[i])
-	{
-		printf("%s", data->map[i]);
-		i++;
-	}
-	// map_check_char(data);
-	// map_flood_fill(data);
-	// printf_map(data);
+	map_check_char(data);
+	map_flood_fill(data);
+	rgb_path_parse3(data);
+	printf_paths(data);
+	printf_map(data);
 }
