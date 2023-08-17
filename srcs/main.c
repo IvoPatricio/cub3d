@@ -1,10 +1,27 @@
 #include "../includes/cub3d.h"
 
+void ft_destroy_images_display_free(t_map *map)
+{
+	mlx_destroy_image(map->mlx->mlx_ptr, map->mlx->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->north->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->south->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->east->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->west->img_to_window);
+	mlx_destroy_display(map->mlx->mlx_ptr);
+	if (map->texture->north)
+		free(map->texture->north);
+	if (map->texture->south)
+		free(map->texture->south);
+	if (map->texture->east)
+		free(map->texture->east);
+	if (map->texture->west)
+		free(map->texture->west);
+}
+
 int	ft_destroyer(t_map *map)
 {
 	mlx_destroy_window(map->mlx->mlx_ptr, map->mlx->win_ptr);
-	mlx_destroy_image(map->mlx->mlx_ptr, map->mlx->img_to_window);
-	mlx_destroy_display(map->mlx->mlx_ptr);
+	ft_destroy_images_display_free(map);
 	free(map->mlx->mlx_ptr);
 	free_structs_mlx(map);
 	exit(1);
@@ -140,7 +157,7 @@ unsigned int	ft_get_pixel_color(t_mlx *mlx, int x, int y)
 	return (color);
 }
 
-void	draw_test(t_map *map, int x)
+void	draw_test(t_map *map, t_mlx *texture, int x)
 {
 	int				y;
 	double			step;
@@ -155,9 +172,9 @@ void	draw_test(t_map *map, int x)
 	while (y < map->ray->drawend)
 	{
 		// cant be 64 needs to be the difference depending on how far you-re
-		texY = (int)texPos & (64 - 1);
+		texY = (int)texPos & (64-1);
 		texPos += step;
-		color = ft_get_pixel_color(map->texture->north, x, texY);
+		color = ft_get_pixel_color(texture, x, texY);
 		ft_pixel_drawing(map->mlx, x, y, color);
 		y++;
 	}
@@ -182,16 +199,16 @@ void	draw_walls(t_map *map, int x)
 	if (map->ray->side == 1)
 	{
 		if (map->ray->stepy > 0)
-			draw_test(map, x); // SOUTH WALL
+			draw_test(map, map->texture->south, x);
 		else
-			draw_test(map, x); // NORTH WALL
+			draw_test(map, map->texture->north, x);
 	}
 	else if (map->ray->side == 0)
 	{
 		if (map->ray->rayDirX < 0 && map->ray->stepx < 0)
-			draw_test(map, x); // EAST WALL
+			draw_test(map, map->texture->east, x);
 		else
-			draw_test(map, x); // WEST WALL
+			draw_test(map, map->texture->west, x);
 	}
 }
 
@@ -344,20 +361,35 @@ int	ft_keys(int key_code, t_map *map)
 	return (0);
 }
 
+void	ft_alloc_textures_utils(t_map *map, t_mlx *texture, char *path)
+{
+	texture->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr, \
+		path, &texture->x, &texture->y);
+	texture->buffer = mlx_get_data_addr(texture->img_to_window, \
+		&texture->a, &texture->b, &texture->c);
+}
+
+void	ft_init_alloc_textures(t_map *map)
+{
+	t_texture	*texture;
+
+	texture = map->texture;
+	texture->north = malloc(sizeof(t_mlx));
+	ft_alloc_textures_utils(map, texture->north, texture->n);
+	texture->south = malloc(sizeof(t_mlx));
+	ft_alloc_textures_utils(map, texture->south, texture->s);
+	texture->west = malloc(sizeof(t_mlx));
+	ft_alloc_textures_utils(map, texture->west, texture->w);
+	texture->east = malloc(sizeof(t_mlx));
+	ft_alloc_textures_utils(map, texture->east, texture->e);
+}
+
 void	ft_mlx_init(t_map *map)
 {
-	int	z;
-
 	map->mlx->mlx_ptr = mlx_init();
-	z = 64;
 	if (map->mlx->mlx_ptr != 0)
 	{
-		map->texture->north = malloc(sizeof(t_mlx));
-		map->texture->north->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr,
-			map->texture->n, &z, &z);
-		map->texture->north->buffer = mlx_get_data_addr(map->texture->north->img_to_window,
-			&map->texture->north->a, &map->texture->north->b,
-			&map->texture->north->c);
+		ft_init_alloc_textures(map);
 		map->mlx->win_ptr = mlx_new_window(map->mlx->mlx_ptr, (int)WIN_X,
 			(int)WIN_Y, "3D");
 		map->mlx->img_to_window = mlx_new_image(map->mlx->mlx_ptr, (int)WIN_X,

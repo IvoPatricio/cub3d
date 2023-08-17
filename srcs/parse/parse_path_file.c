@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:03 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:37:38 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:52:30 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ int	parse_path(t_data *data)
 	while (data->argv[i] && data->map_time < 6)
 	{
 		isspace_file1(data, i, 0);
-		if (strncmp(data->argv[i], "NO./", 4) == 0)
+		if (ft_strncmp(data->argv[i], "NO./", 4) == 0)
 			data->no = path_creation(data, i, 2);
-		else if (strncmp(data->argv[i], "SO./", 4) == 0)
+		else if (ft_strncmp(data->argv[i], "SO./", 4) == 0)
 			data->so = path_creation(data, i, 2);
-		else if (strncmp(data->argv[i], "WE./", 4) == 0)
+		else if (ft_strncmp(data->argv[i], "WE./", 4) == 0)
 			data->we = path_creation(data, i, 2);
-		else if (strncmp(data->argv[i], "EA./", 4) == 0)
+		else if (ft_strncmp(data->argv[i], "EA./", 4) == 0)
 			data->ea = path_creation(data, i, 2);
-		else if (strncmp(data->argv[i], "F", 1) == 0)
+		else if (ft_strncmp(data->argv[i], "F", 1) == 0)
 			data->f = path_creation(data, i, 1);
-		else if (strncmp(data->argv[i], "C", 1) == 0)
+		else if (ft_strncmp(data->argv[i], "C", 1) == 0)
 			data->c = path_creation(data, i, 1);
 		i++;
 	}

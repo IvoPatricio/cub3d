@@ -64,6 +64,7 @@ typedef struct s_mlx
 	void			*win_ptr;
 	void			*img_to_window;
 	char			*buffer;
+	void			*test_win;
 	int				i;
 	int				a;
 	int				b;
@@ -136,10 +137,13 @@ typedef struct s_texture
 	char			player_direction;
 	int				roof;
 	int				floor;
+	int				x;
+	int				y;
 	t_mlx			*north;
 	t_mlx			*south;
 	t_mlx			*east;
 	t_mlx			*west;
+	t_mlx			*minimap;
 }			t_texture;
 
 typedef struct s_character
