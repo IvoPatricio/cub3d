@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:03 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 18:38:21 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:37:38 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*isspace_file2(t_data *data, char *str, int ind, int i)
 	x = 0;
 	while (data->argv[ind][i])
 	{
-		if (isspace(data->argv[ind][i]) != 0)
+		if (ft_isspace(data->argv[ind][i]) != 0)
 			i++;
 		else
 		{
@@ -55,7 +55,7 @@ char	*isspace_file1(t_data *data, int ind, int z)
 	x = 0;
 	while (data->argv[ind][i])
 	{
-		if (isspace(data->argv[ind][i]) != 0)
+		if (ft_isspace(data->argv[ind][i]) != 0)
 			i++;
 		else
 		{

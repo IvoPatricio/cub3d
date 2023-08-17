@@ -29,18 +29,13 @@
 # define CLOSE 65307
 
 # include<unistd.h>
-# include<stdlib.h>
 # include<stdio.h>
-# include<string.h>
+# include<stdlib.h>
 # include<stdarg.h>
 # include<sys/types.h>
 # include<sys/stat.h>
 # include<fcntl.h>
-# include<limits.h>
-# include<string.h>
 # include<math.h>
-# include<stdbool.h>
-# include<ctype.h>
 
 # include "../srcs/utils/get_next_line/get_next_line.h"
 # include "../mini-linux/mlx.h"
@@ -160,17 +155,10 @@ typedef struct s_character
 
 void		init_structs(t_map *map);
 void		init_textured(t_data *data, t_texture *texture);
-int			create_trgb(int t, int r, int g, int b);
-void 		map_rgb(t_data *data, t_texture *texture);
 void		init_player_rest(t_data *data, t_play *play);
 void		init_player1(t_data *data, t_play *play);
-
-// ft_split.c //
-static int	n_palavras(char *s, char c, int i);
-int			delimiter(char *s, char c);
-int			n_array(char *s, char c);
-char		**junction_strs(char *s, char c, int i);
-char		**ft_split(char const *s, char c);
+int			create_trgb(int t, int r, int g, int b);
+void		map_rgb(t_data *data, t_texture *texture);
 
 // free_utils.c //
 void		free_map(t_data *data);
@@ -215,6 +203,15 @@ size_t		ft_lenspace(const char *str);
 size_t		ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *str);
+int			ft_isdigit(int c);
+int			ft_isspace(char src);
+
+// ft_split.c //
+static int	n_palavras(char *s, char c, int i);
+int			delimiter(char *s, char c);
+int			n_array(char *s, char c);
+char		**junction_strs(char *s, char c, int i);
+char		**ft_split(char const *s, char c);
 
 // utils //
 //errors.c//

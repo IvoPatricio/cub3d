@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:38 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 18:42:18 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:57:16 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ void	main_parse(t_data *data, char **argv)
 	map_creation(data, i);
 	parse_map_caracthers(data);
 	map_flood_fill(data);
-	printf_paths(data);
-	printf_map(data);
 }

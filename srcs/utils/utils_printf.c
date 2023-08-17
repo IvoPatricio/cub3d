@@ -13,7 +13,7 @@ void printf_map(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("--------\e[1;34mMATRIX_MAP\033[0m--------\n");
+	printf("--------\e[1;34mMATRIX_MAP\033[0m--------");
 	while (i < data->arr)
 	{
 		printf("%s", data->map[i]);
@@ -40,7 +40,7 @@ void printf_paths(t_data *data)
 
 void printf_struct_map(t_map *map)
 {
-	printf("---------\e[1;34mTEXTURES\033[0m---------");
+	printf("\n---------\e[1;34mTEXTURES\033[0m---------");
 	printf("\nTexture_East:%s\n", map->texture->e);
 	printf("Texture_North:%s\n", map->texture->n);
 	printf("Texture_South:%s\n", map->texture->s);

@@ -387,6 +387,7 @@ int	main(int argc, char **argv)
 		struct_malloc_error(&map, map.data, sizeof(map.data));
 		main_parse(map.data, argv);
 		init_structs(&map);
+		printf_map(map.data);
 		printf_struct_map(&map);
 		ft_mlx_init(&map);
 		free_structs_mlx(&map);

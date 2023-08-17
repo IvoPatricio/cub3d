@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:57 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 18:40:43 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:24:43 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	paths_parse_caracthers(t_data *data, int i)
 	x = 0;
 	while (data->c_arr[i][x])
 	{
-		if (isdigit(data->c_arr[i][x]))
+		if (ft_isdigit(data->c_arr[i][x]))
 			x++;
 		else
 			printf_error(data, "Invalid Roof NonInteger Caracthers");
@@ -27,7 +27,7 @@ void	paths_parse_caracthers(t_data *data, int i)
 	x = 0;
 	while (data->f_arr[i][x])
 	{
-		if (isdigit(data->f_arr[i][x]))
+		if (ft_isdigit(data->f_arr[i][x]))
 			x++;
 		else
 			printf_error(data, "Invalid Floor NonInteger Caracthers");

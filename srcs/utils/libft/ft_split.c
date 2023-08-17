@@ -6,11 +6,11 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 20:25:17 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/15 22:03:53 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:28:22 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 int	delimiter(char *s, char c)
 {

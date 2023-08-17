@@ -6,7 +6,7 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/17 19:01:58 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/17 19:49:02 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,17 @@ CC			= gcc -fsanitize=address -g
 CFLAGS		= -I/usr/include -Imlx_linux -O3
 SRC			= srcs/main.c \
 			srcs/parse/main_parse.c \
-			srcs/parse/init.c \
 			srcs/parse/parse_file.c \
 			srcs/parse/parse_map_caracthers.c \
 			srcs/parse/parse_map_flood_fill.c \
 			srcs/parse/parse_path_data.c \
 			srcs/parse/parse_path_file.c \
-			srcs/utils/ft_split.c \
+			srcs/execution/init_text_player.c \
+			srcs/execution/init_rgb.c \
 			srcs/utils/utils_malloc.c \
-			srcs/utils/utils_parse.c \
+			srcs/utils/libft/utils_parse_1.c \
+			srcs/utils/libft/utils_parse_2.c \
+			srcs/utils/libft/ft_split.c \
 			srcs/utils/utils_printf.c \
 			srcs/utils/utils_free.c \
 			srcs/utils/get_next_line/get_next_line.c \
