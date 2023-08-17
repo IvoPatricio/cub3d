@@ -6,7 +6,7 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/16 03:55:21 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/17 17:30:13 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ re: fclean all
 
 
 r:
-	make re && ./cub3d maps/map1.cub
+	make && ./cub3d maps/map1.cub
 
 
 .PHONY: all clean fclean re

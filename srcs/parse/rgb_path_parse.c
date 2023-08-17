@@ -22,41 +22,6 @@ char	*give_mem_char(char *dest, char *src)
 	return (dest);
 }
 
-void	rgb_path_parse3(t_data *data)
-{
-	int		i;
-	int		x;
-
-	data->f_arr = ft_split(data->f, ',');
-	data->c_arr = ft_split(data->c, ',');
-	i = 0;
-	x = 0;
-	while (i < 3)
-	{
-		while (data->c_arr[i][x])
-		{
-			if (isdigit(data->c_arr[i][x]))
-				x++;
-			else
-				printf_error(data, "Invalid Roof NonInteger Caracthers");
-		}
-		x = 0;
-		while (data->f_arr[i][x])
-		{
-			if (isdigit(data->f_arr[i][x]))
-				x++;
-			else
-				printf_error(data, "Invalid Floor NonInteger Caracthers");
-		}
-		x = 0;
-		if (ft_atoi(data->f_arr[i]) > 255 || ft_atoi(data->f_arr[i]) < 0)
-			printf_error(data, "Invalid RGB value 0-255");
-		if (ft_atoi(data->c_arr[i]) > 255 || ft_atoi(data->c_arr[i]) < 0)
-			printf_error(data, "Invalid RGB value 0-255");
-		i++;
-	}
-}
-
 void	rgb_path_parse2(t_data *data)
 {
 	if (ft_strncmp(data->f, "F", 1) != 0)

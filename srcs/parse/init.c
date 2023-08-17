@@ -9,14 +9,10 @@ void	map_rgb(t_data *data, t_texture *texture)
 {
 	char	*arr;
 
-	arr = data->f_arr[0];
-	arr += 2;
-	texture->floor = create_trgb(0, ft_atoi(arr), ft_atoi(data->f_arr[1]),
-		ft_atoi(data->f_arr[2]));
-	arr = data->c_arr[0];
-	arr += 2;
-	texture->roof = create_trgb(0, ft_atoi(arr), ft_atoi(data->c_arr[1]),
-		ft_atoi(data->c_arr[2]));
+	texture->floor = create_trgb(0, ft_atoi(data->f_arr[0]), \
+		ft_atoi(data->f_arr[1]), ft_atoi(data->f_arr[2]));
+	texture->roof = create_trgb(0, ft_atoi(data->f_arr[0]), \
+		ft_atoi(data->c_arr[1]), ft_atoi(data->c_arr[2]));
 }
 
 void	init_player(t_data *data, t_play *play)
@@ -25,7 +21,6 @@ void	init_player(t_data *data, t_play *play)
 	play->posY = data->player_y + 0.5;
 	if (data->direction == NORTH)
 	{
-		printf("-----------NORTH-----------\n\n");
 		play->dir_x = 0;
 		play->dir_y = -1;
 		play->plane_x = 0.66;
@@ -33,7 +28,6 @@ void	init_player(t_data *data, t_play *play)
 	}
 	else if (data->direction == SOUTH)
 	{
-		printf("-----------SOUTH-----------\n\n");
 		play->dir_x = 0;
 		play->dir_y = 1;
 		play->plane_x = -0.66;
@@ -41,7 +35,6 @@ void	init_player(t_data *data, t_play *play)
 	}
 	else if (data->direction == EAST)
 	{
-		printf("-----------EAST-----------\n\n");
 		play->dir_x = -1;
 		play->dir_y = 0;
 		play->plane_x = 0;
@@ -49,7 +42,6 @@ void	init_player(t_data *data, t_play *play)
 	}
 	else if (data->direction == WEST)
 	{
-		printf("-----------WEST-----------\n\n");
 		play->dir_x = 1;
 		play->dir_y = 0;
 		play->plane_x = 0;
@@ -59,10 +51,10 @@ void	init_player(t_data *data, t_play *play)
 
 void	init_textured(t_data *data, t_texture *texture)
 {
-	texture->n = "./path_north";
-	texture->s = "./path_south";
-	texture->w = "./path_west";
-	texture->e = "./path_east";
+	texture->n = data->no;
+	texture->s = data->so;
+	texture->w = data->we;
+	texture->e = data->ea;
 	if (data->direction == NORTH)
 		texture->player_direction = NORTH;
 	else if (data->direction == SOUTH)

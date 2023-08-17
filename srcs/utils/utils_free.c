@@ -18,9 +18,6 @@ void	free_map(t_data *data)
 		free(data->map);
 	if (data->f_arr)
 	{
-		printf("\n\n\nINSIDE\n\n\n");
-		printf("%s\n", data->c_arr[i]);
-		printf("\n\n\nINSIDE2\n\n\n");
 		i = 0;
 		while (data->f_arr[i])
 		{
@@ -31,8 +28,6 @@ void	free_map(t_data *data)
 	}
 	if (data->c_arr)
 	{
-		printf("\n\n\nINSIDE\n\n\n");
-		printf("%s\n", data->c_arr[i]);
 		i = 0;
 		while (data->c_arr[i])
 		{

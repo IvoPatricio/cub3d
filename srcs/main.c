@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-int ft_destroyer(t_map *map)
+int	ft_destroyer(t_map *map)
 {
 	mlx_destroy_window(map->mlx->mlx_ptr, map->mlx->win_ptr);
 	mlx_destroy_image(map->mlx->mlx_ptr, map->mlx->img_to_window);
@@ -10,103 +10,103 @@ int ft_destroyer(t_map *map)
 	exit(1);
 }
 
-void ft_key_w(t_map *map, int key_code)
+void	ft_key_w(t_map *map, int key_code)
 {
-	double tempX;
-	double tempY;
+	double	tempX;
+	double	tempY;
 
 	tempX = map->play->posX;
 	tempY = map->play->posY;
 	if (key_code == W_KEY)
 	{
-		if (map->map[(int)map->play->posY][((int)map->play->posX + \
-			(int)map->play->dir_x * (int)PLAYER_SPEED)] == FLOOR)
+		if (map->map[(int)map->play->posY][((int)map->play->posX
+				+ (int)map->play->dir_x * (int)PLAYER_SPEED)] == FLOOR)
 			map->play->posX += map->play->dir_x * PLAYER_SPEED;
-			if (map->map[(int)map->play->posY][((int)map->play->posX + \
-				(int)map->play->dir_x * (int)PLAYER_SPEED)] == WALL)
-				map->play->posX = tempX;
-		if (map->map[(int)(map->play->posY + (int)map->play->dir_y * \
-			(int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
+		if (map->map[(int)map->play->posY][((int)map->play->posX
+				+ (int)map->play->dir_x * (int)PLAYER_SPEED)] == WALL)
+			map->play->posX = tempX;
+		if (map->map[(int)(map->play->posY + (int)map->play->dir_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
 			map->play->posY += map->play->dir_y * PLAYER_SPEED;
-			if (map->map[(int)(map->play->posY + (int)map->play->dir_y * \
-				(int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
-				map->play->posY = tempY;
+		if (map->map[(int)(map->play->posY + (int)map->play->dir_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
+			map->play->posY = tempY;
 	}
 }
 
-void ft_key_s(t_map *map, int key_code)
+void	ft_key_s(t_map *map, int key_code)
 {
-	double tempX;
-	double tempY;
+	double	tempX;
+	double	tempY;
 
 	tempX = map->play->posX;
 	tempY = map->play->posY;
 	if (key_code == S_KEY)
 	{
-		if (map->map[(int)map->play->posY][((int)map->play->posX - \
-			(int)map->play->dir_x * (int)PLAYER_SPEED)] == FLOOR)
+		if (map->map[(int)map->play->posY][((int)map->play->posX
+				- (int)map->play->dir_x * (int)PLAYER_SPEED)] == FLOOR)
 			map->play->posX -= map->play->dir_x * PLAYER_SPEED;
-			if (map->map[(int)map->play->posY][((int)map->play->posX - \
-				(int)map->play->dir_x * (int)PLAYER_SPEED)] == WALL)
-				map->play->posX = tempX;
-		if (map->map[((int)map->play->posY - (int)map->play->dir_y * \
-			(int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
+		if (map->map[(int)map->play->posY][((int)map->play->posX
+				- (int)map->play->dir_x * (int)PLAYER_SPEED)] == WALL)
+			map->play->posX = tempX;
+		if (map->map[((int)map->play->posY - (int)map->play->dir_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
 			map->play->posY -= map->play->dir_y * PLAYER_SPEED;
-			if (map->map[((int)map->play->posY - (int)map->play->dir_y * \
-				(int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
-				map->play->posY = tempY;
+		if (map->map[((int)map->play->posY - (int)map->play->dir_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
+			map->play->posY = tempY;
 	}
 }
 
-void ft_key_a(t_map *map, int key_code)
+void	ft_key_a(t_map *map, int key_code)
 {
-	double tempX;
-	double tempY;
+	double	tempX;
+	double	tempY;
 
 	tempX = map->play->posX;
 	tempY = map->play->posY;
 	if (key_code == A_KEY)
 	{
-		if ((map->map[(int)map->play->posY][((int)map->play->posX - \
-			(int)map->play->plane_x * (int)PLAYER_SPEED)]) == FLOOR)
+		if ((map->map[(int)map->play->posY][((int)map->play->posX
+					- (int)map->play->plane_x * (int)PLAYER_SPEED)]) == FLOOR)
 			map->play->posX -= map->play->plane_x * PLAYER_SPEED;
-			if ((map->map[(int)map->play->posY][((int)map->play->posX - \
-				(int)map->play->plane_x * (int)PLAYER_SPEED)]) == WALL)
-				map->play->posX = tempX;
-		if (map->map[((int)map->play->posY - (int)map->play->plane_y * \
-			(int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
+		if ((map->map[(int)map->play->posY][((int)map->play->posX
+					- (int)map->play->plane_x * (int)PLAYER_SPEED)]) == WALL)
+			map->play->posX = tempX;
+		if (map->map[((int)map->play->posY - (int)map->play->plane_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
 			map->play->posY -= map->play->plane_y * PLAYER_SPEED;
-			if (map->map[((int)map->play->posY - (int)map->play->plane_y * \
-				(int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
-				map->play->posY = tempY;
+		if (map->map[((int)map->play->posY - (int)map->play->plane_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
+			map->play->posY = tempY;
 	}
 }
 
-void ft_key_d(t_map *map, int key_code)
+void	ft_key_d(t_map *map, int key_code)
 {
-	double tempX;
-	double tempY;
+	double	tempX;
+	double	tempY;
 
 	tempX = map->play->posX;
 	tempY = map->play->posY;
 	if (key_code == D_KEY)
 	{
-		if ((map->map[(int)map->play->posY][((int)map->play->posX + \
-			(int)map->play->plane_x * (int)PLAYER_SPEED)]) == FLOOR)
+		if ((map->map[(int)map->play->posY][((int)map->play->posX
+					+ (int)map->play->plane_x * (int)PLAYER_SPEED)]) == FLOOR)
 			map->play->posX += map->play->plane_x * PLAYER_SPEED;
-			if ((map->map[(int)map->play->posY][((int)map->play->posX + \
-				(int)map->play->plane_x * (int)PLAYER_SPEED)]) == WALL)
-				map->play->posX = tempX;
-		if (map->map[((int)map->play->posY + (int)map->play->plane_y * \
-			(int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
+		if ((map->map[(int)map->play->posY][((int)map->play->posX
+					+ (int)map->play->plane_x * (int)PLAYER_SPEED)]) == WALL)
+			map->play->posX = tempX;
+		if (map->map[((int)map->play->posY + (int)map->play->plane_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == FLOOR)
 			map->play->posY += map->play->plane_y * PLAYER_SPEED;
-			if (map->map[((int)map->play->posY + (int)map->play->plane_y * \
-				(int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
-				map->play->posY = tempY;
+		if (map->map[((int)map->play->posY + (int)map->play->plane_y
+				* (int)PLAYER_SPEED)][(int)map->play->posX] == WALL)
+			map->play->posY = tempY;
 	}
 }
 
-void ft_key_angle(t_map *map, double rotate)
+void	ft_key_angle(t_map *map, double rotate)
 {
 	t_play	*play;
 	double	old_dir_x;
@@ -127,7 +127,7 @@ void	ft_pixel_drawing(t_mlx *mlx, int x, int y, int color)
 	char	*dst;
 
 	dst = mlx->buffer + (y * mlx->b + x * (mlx->a / 8));
-	*(unsigned int *) dst = color;
+	*(unsigned int *)dst = color;
 }
 
 unsigned int	ft_get_pixel_color(t_mlx *mlx, int x, int y)
@@ -142,16 +142,22 @@ unsigned int	ft_get_pixel_color(t_mlx *mlx, int x, int y)
 
 void	draw_test(t_map *map, int x)
 {
-	int y = map->ray->drawstart;
-	double step = 1.0 * 64 / map->ray->line_height;
-	double texPos = (map->ray->drawstart - WIN_Y / 2 + map->ray->line_height / 2) * step;
+	int				y;
+	double			step;
+	double			texPos;
+	int				texY;
+	unsigned int	color;
 
+	y = map->ray->drawstart;
+	step = 1.0 * 64 / map->ray->line_height;
+	texPos = (map->ray->drawstart - WIN_Y / 2 + map->ray->line_height / 2)
+		* step;
 	while (y < map->ray->drawend)
 	{
-		//cant be 64 needs to be the difference depending on how far you-re
-		int texY = (int)texPos & (64 - 1);
+		// cant be 64 needs to be the difference depending on how far you-re
+		texY = (int)texPos & (64 - 1);
 		texPos += step;
-		unsigned int color = ft_get_pixel_color(map->texture->north, x, texY);
+		color = ft_get_pixel_color(map->texture->north, x, texY);
 		ft_pixel_drawing(map->mlx, x, y, color);
 		y++;
 	}
@@ -171,11 +177,10 @@ void	draw_texture(t_map *map, int x, int color)
 
 void	draw_walls(t_map *map, int x)
 {
-	//side = 1 vertical WALLS
-	//stepY think of it was TAN
+	// side = 1 vertical WALLS
+	// stepY think of it was TAN
 	if (map->ray->side == 1)
 	{
-		//draw_texture(map, x, 0xFF0000);
 		if (map->ray->stepy > 0)
 			draw_test(map, x); // SOUTH WALL
 		else
@@ -184,13 +189,13 @@ void	draw_walls(t_map *map, int x)
 	else if (map->ray->side == 0)
 	{
 		if (map->ray->rayDirX < 0 && map->ray->stepx < 0)
-			draw_test(map, x); //EAST WALL
-		else 
-			draw_test(map, x); //WEST WALL
+			draw_test(map, x); // EAST WALL
+		else
+			draw_test(map, x); // WEST WALL
 	}
 }
 
-void draw_background(t_map *map, int x)
+void	draw_background(t_map *map, int x)
 {
 	int	y;
 
@@ -205,7 +210,7 @@ void draw_background(t_map *map, int x)
 	}
 }
 
-void raycast_dda(t_map *map)
+void	raycast_dda(t_map *map)
 {
 	t_ray	*ray;
 
@@ -233,17 +238,14 @@ void raycast_dda(t_map *map)
 		ray->walldist = ray->sideDistX - ray->deltaDistX;
 	}
 	else
-		ray->walldist =  ray->sideDistY - ray->deltaDistY;
+		ray->walldist = ray->sideDistY - ray->deltaDistY;
 	ray->line_height = (int)(WIN_Y / ray->walldist);
-
 	ray->drawstart = -ray->line_height / 2 + (int)WIN_Y / 2;
 	if (ray->drawstart < 0)
 		ray->drawstart = 0;
-
 	ray->drawend = ray->line_height / 2 + (int)WIN_Y / 2;
-	if (ray->drawend >=  (int)WIN_Y)
+	if (ray->drawend >= (int)WIN_Y)
 		ray->drawend = (int)WIN_Y - 1;
-
 	if (ray->side == 0)
 		ray->wallhit = map->play->posY + ray->walldist * ray->rayDirY;
 	else
@@ -251,7 +253,7 @@ void raycast_dda(t_map *map)
 	ray->wallhit -= floor(ray->wallhit);
 }
 
-void raycast_2(t_map *map)
+void	raycast_2(t_map *map)
 {
 	t_ray	*ray;
 
@@ -279,12 +281,12 @@ void raycast_2(t_map *map)
 	raycast_dda(map);
 }
 
-void raycast_1(t_map *map, int i)
+void	raycast_1(t_map *map, int i)
 {
 	t_ray	*ray;
 
 	ray = map->ray;
-	ray->cameraX = 2 * i /(double)WIN_X - 1;
+	ray->cameraX = 2 * i / (double)WIN_X - 1;
 	ray->rayDirX = map->play->dir_x + map->play->plane_x * ray->cameraX;
 	ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
 	ray->mapX = (int)map->play->posX;
@@ -300,9 +302,9 @@ void raycast_1(t_map *map, int i)
 	raycast_2(map);
 }
 
-void raydrawing(t_map *map)
+void	raydrawing(t_map *map)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (x < (int)WIN_X)
@@ -312,7 +314,7 @@ void raydrawing(t_map *map)
 		draw_walls(map, x);
 		x++;
 	}
-	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr, \
+	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr,
 		map->mlx->img_to_window, 0, 0);
 }
 
@@ -328,13 +330,13 @@ int	ft_keys(int key_code, t_map *map)
 		ft_key_a(map, key_code);
 	if (key_code == D_KEY)
 		ft_key_d(map, key_code);
-	if (key_code == RIGHT && (map->data->direction == WEST || \
-		map->data->direction == EAST))
+	if (key_code == RIGHT && (map->data->direction == WEST
+			|| map->data->direction == EAST))
 		ft_key_angle(map, -(double)ROTATE_SPEED);
 	else if (key_code == RIGHT)
 		ft_key_angle(map, (double)ROTATE_SPEED);
-	if (key_code == LEFT && (map->data->direction == WEST || \
-		map->data->direction == EAST))
+	if (key_code == LEFT && (map->data->direction == WEST
+			|| map->data->direction == EAST))
 		ft_key_angle(map, (double)ROTATE_SPEED);
 	else if (key_code == LEFT)
 		ft_key_angle(map, -(double)ROTATE_SPEED);
@@ -342,24 +344,26 @@ int	ft_keys(int key_code, t_map *map)
 	return (0);
 }
 
-void ft_mlx_init(t_map *map)
+void	ft_mlx_init(t_map *map)
 {
+	int	z;
+
 	map->mlx->mlx_ptr = mlx_init();
-	int	z = 64;
+	z = 64;
 	if (map->mlx->mlx_ptr != 0)
 	{
-
-
 		map->texture->north = malloc(sizeof(t_mlx));
-		map->texture->north->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr, "./sprites/north_wall.xpm",&z, &z);
-		map->texture->north->buffer = mlx_get_data_addr(map->texture->north->img_to_window, &map->texture->north->a,
-			&map->texture->north->b, &map->texture->north->c);
-
-
-		map->mlx->win_ptr = mlx_new_window(map->mlx->mlx_ptr, (int)WIN_X, (int)WIN_Y, "3D");
-		map->mlx->img_to_window = mlx_new_image(map->mlx->mlx_ptr, (int)WIN_X, (int)WIN_Y);
-		map->mlx->buffer = mlx_get_data_addr(map->mlx->img_to_window, &map->mlx->a,
-			&map->mlx->b, &map->mlx->c);
+		map->texture->north->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr,
+			map->texture->n, &z, &z);
+		map->texture->north->buffer = mlx_get_data_addr(map->texture->north->img_to_window,
+			&map->texture->north->a, &map->texture->north->b,
+			&map->texture->north->c);
+		map->mlx->win_ptr = mlx_new_window(map->mlx->mlx_ptr, (int)WIN_X,
+			(int)WIN_Y, "3D");
+		map->mlx->img_to_window = mlx_new_image(map->mlx->mlx_ptr, (int)WIN_X,
+			(int)WIN_Y);
+		map->mlx->buffer = mlx_get_data_addr(map->mlx->img_to_window,
+			&map->mlx->a, &map->mlx->b, &map->mlx->c);
 		if (!map->mlx->buffer)
 		{
 			printf("Error\nMlx_Buffer Allocation Failed");
@@ -373,7 +377,7 @@ void ft_mlx_init(t_map *map)
 	}
 }
 
-void init_data_null(t_data *data, char **argv)
+void	init_data_null(t_data *data, char **argv)
 {
 	data->argv = argv;
 	data->f_arr = NULL;
@@ -389,7 +393,7 @@ void init_data_null(t_data *data, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
+	t_map map;
 
 	if (argc == 2)
 	{
@@ -397,11 +401,11 @@ int	main(int argc, char **argv)
 		struct_malloc_error(&map, map.data, sizeof(map.data));
 		init_data_null(map.data, argv);
 		main_parse(map.data);
-		free_map(map.data);
-		//init_structs(&map);
-		//printf_struct_map(&map);
-		//ft_mlx_init(&map);
-		//free_structs_mlx(&map);
+		// free_map(map.data);
+		init_structs(&map);
+		printf_struct_map(&map);
+		ft_mlx_init(&map);
+		free_structs_mlx(&map);
 	}
 	else
 	{

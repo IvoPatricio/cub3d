@@ -1,13 +1,9 @@
 NO ./sprites/north_wall.xpm
-
-
-WE ./saprit  es/west_wa  ll.xpm
-EA . /sprite s/east_wall.xpm
+WE ./sprites/west_wall.xpm
+EA ./sprites/east_wall.xpm
+SO ./sprites/south_wall.xpm
 
 F 255,1,255
-
-
-SO ./s  prites/south _wall.xpm
 C 255,100,1
 
  111111
