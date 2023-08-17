@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:22:41 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 00:00:18 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_alloc_textures_utils(t_map *map, t_mlx *texture, char *path)
 {
-	texture->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr, \
-		path, &texture->x, &texture->y);
-	texture->buffer = mlx_get_data_addr(texture->img_to_window, \
-		&texture->a, &texture->b, &texture->c);
+	texture->img_to_window = mlx_xpm_file_to_image(map->mlx->mlx_ptr, path, \
+		&texture->x, &texture->y);
+	texture->buffer = mlx_get_data_addr(texture->img_to_window, &texture->a, \
+		&texture->b, &texture->c);
 }
 
 void	ft_init_alloc_textures(t_map *map)
 {
-	t_texture	*texture;
+	t_texture   *texture;
 
 	texture = map->texture;
 	texture->north = malloc(sizeof(t_mlx));

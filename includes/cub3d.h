@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:45:02 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:47:57 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 00:02:01 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,18 @@ typedef struct s_play
 
 typedef struct s_ray
 {
-	double					cameraX;
-	double					rayDirX;
-	double					rayDirY;
-	double					deltaDistX;
-	double					deltaDistY;
-	double					sideDistX;
-	double					sideDistY;
+	double					camera_x;
+	double					raydir_x;
+	double					raydir_y;
+	double					deltadist_x;
+	double					deltadist_y;
+	double					sidedist_x;
+	double					sidedist_y;
 	double					walldist;
 	double					wallhit;
 	double					step;
-	int						mapX;
-	int						mapY;
+	int						map_x;
+	int						map_y;
 	int						stepx;
 	int						stepy;
 	int						hit;
@@ -210,6 +210,7 @@ void						ft_pixel_drawing(t_mlx *mlx, int x, int y,
 unsigned int				ft_get_pixel_color(t_mlx *mlx, int x, int y);
 
 // raycast_lodev_dda.c//
+void						raycast_rest_dda(t_map *map);
 void						raycast_dda(t_map *map);
 void						raycast_2(t_map *map);
 void						raycast_1(t_map *map, int i);
@@ -280,8 +281,5 @@ int							delimiter(char *s, char c);
 int							n_array(char *s, char c);
 char						**junction_strs(char *s, char c, int i);
 char						**ft_split(char const *s, char c);
-
-// utils //
-// errors.c//
 
 #endif

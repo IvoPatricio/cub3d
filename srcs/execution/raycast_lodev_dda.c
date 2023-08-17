@@ -6,11 +6,36 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:29 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:46:23 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 00:02:37 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	raycast_rest_dda(t_map *map)
+{
+	t_ray	*ray;
+
+	ray = map->ray;
+	if (ray->side == 0)
+	{
+		ray->walldist = ray->sidedist_x - ray->deltadist_x;
+	}
+	else
+		ray->walldist = ray->sidedist_y - ray->deltadist_y;
+	ray->line_height = (int)(WIN_Y / ray->walldist);
+	ray->drawstart = -ray->line_height / 2 + (int)WIN_Y / 2;
+	if (ray->drawstart < 0)
+		ray->drawstart = 0;
+	ray->drawend = ray->line_height / 2 + (int)WIN_Y / 2;
+	if (ray->drawend >= (int)WIN_Y)
+		ray->drawend = (int)WIN_Y - 1;
+	if (ray->side == 0)
+		ray->wallhit = map->play->pos_y + ray->walldist * ray->raydir_y;
+	else
+		ray->wallhit = map->play->pos_x + ray->walldist * ray->raydir_x;
+	ray->wallhit -= floor(ray->wallhit);
+}
 
 void	raycast_dda(t_map *map)
 {
@@ -20,39 +45,22 @@ void	raycast_dda(t_map *map)
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->sidedist_x < ray->sidedist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepx;
+			ray->sidedist_x += ray->deltadist_x;
+			ray->map_x += ray->stepx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepy;
+			ray->sidedist_y += ray->deltadist_y;
+			ray->map_y += ray->stepy;
 			ray->side = 1;
 		}
-		if (map->map[ray->mapY][ray->mapX] == WALL)
+		if (map->map[ray->map_y][ray->map_x] == WALL)
 			ray->hit = 1;
 	}
-	if (ray->side == 0)
-	{
-		ray->walldist = ray->sideDistX - ray->deltaDistX;
-	}
-	else
-		ray->walldist = ray->sideDistY - ray->deltaDistY;
-	ray->line_height = (int)(WIN_Y / ray->walldist);
-	ray->drawstart = -ray->line_height / 2 + (int)WIN_Y / 2;
-	if (ray->drawstart < 0)
-		ray->drawstart = 0;
-	ray->drawend = ray->line_height / 2 + (int)WIN_Y / 2;
-	if (ray->drawend >= (int)WIN_Y)
-		ray->drawend = (int)WIN_Y - 1;
-	if (ray->side == 0)
-		ray->wallhit = map->play->pos_y + ray->walldist * ray->rayDirY;
-	else
-		ray->wallhit = map->play->pos_x + ray->walldist * ray->rayDirX;
-	ray->wallhit -= floor(ray->wallhit);
+	raycast_rest_dda(map);
 }
 
 void	raycast_2(t_map *map)
@@ -60,27 +68,28 @@ void	raycast_2(t_map *map)
 	t_ray	*ray;
 
 	ray = map->ray;
-	if (ray->rayDirX < 0)
+	if (ray->raydir_x < 0)
 	{
 		ray->stepx = -1;
-		ray->sideDistX = (map->play->pos_x - ray->mapX) * ray->deltaDistX;
+		ray->sidedist_x = (map->play->pos_x - ray->map_x) * ray->deltadist_x;
 	}
 	else
 	{
 		ray->stepx = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - map->play->pos_x) * ray->deltaDistX;
+		ray->sidedist_x = (ray->map_x + 1.0 - map->play->pos_x)
+			* ray->deltadist_x;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->raydir_y < 0)
 	{
 		ray->stepy = -1;
-		ray->sideDistY = (map->play->pos_y - ray->mapY) * ray->deltaDistY;
+		ray->sidedist_y = (map->play->pos_y - ray->map_y) * ray->deltadist_y;
 	}
 	else
 	{
 		ray->stepy = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - map->play->pos_y) * ray->deltaDistY;
+		ray->sidedist_y = (ray->map_y + 1.0 - map->play->pos_y)
+			* ray->deltadist_y;
 	}
-	raycast_dda(map);
 }
 
 void	raycast_1(t_map *map, int i)
@@ -88,18 +97,19 @@ void	raycast_1(t_map *map, int i)
 	t_ray	*ray;
 
 	ray = map->ray;
-	ray->cameraX = 2 * i / (double)WIN_X - 1;
-	ray->rayDirX = map->play->dir_x + map->play->plane_x * ray->cameraX;
-	ray->rayDirY = map->play->dir_y + map->play->plane_y * ray->cameraX;
-	ray->mapX = (int)map->play->pos_x;
-	ray->mapY = (int)map->play->pos_y;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->camera_x = 2 * i / (double)WIN_X - 1;
+	ray->raydir_x = map->play->dir_x + map->play->plane_x * ray->camera_x;
+	ray->raydir_y = map->play->dir_y + map->play->plane_y * ray->camera_x;
+	ray->map_x = (int)map->play->pos_x;
+	ray->map_y = (int)map->play->pos_y;
+	if (ray->raydir_x == 0)
+		ray->deltadist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->deltadist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->deltadist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->deltadist_y = fabs(1 / ray->raydir_y);
 	raycast_2(map);
+	raycast_dda(map);
 }

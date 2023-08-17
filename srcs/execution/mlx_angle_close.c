@@ -6,19 +6,19 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:32 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:18:13 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 00:29:33 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void ft_destroy_images_display_free(t_map *map)
+void	ft_destroy_images_display_free(t_map *map)
 {
 	mlx_destroy_image(map->mlx->mlx_ptr, map->mlx->img_to_window);
-	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->north->img_to_window);
-	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->south->img_to_window);
-	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->east->img_to_window);
-	mlx_destroy_image(map->mlx->mlx_ptr ,map->texture->west->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr, map->texture->north->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr, map->texture->south->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr, map->texture->east->img_to_window);
+	mlx_destroy_image(map->mlx->mlx_ptr, map->texture->west->img_to_window);
 	mlx_destroy_display(map->mlx->mlx_ptr);
 	if (map->texture->north)
 		free(map->texture->north);
@@ -41,9 +41,9 @@ int	ft_destroyer(t_map *map)
 
 void	ft_key_angle(t_map *map, double rotate)
 {
-	t_play	*play;
-	double	old_dir_x;
-	double	old_plane_x;
+    t_play  *play;
+    double  old_dir_x;
+    double  old_plane_x;
 
 	play = map->play;
 	old_dir_x = play->dir_x;

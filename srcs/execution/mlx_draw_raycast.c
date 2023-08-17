@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:28:00 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/17 23:59:31 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,19 @@ void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 {
 	int				y;
 	double			step;
-	double			texPos;
-	int				texY;
+	double			texpos;
+	int				texy;
 	unsigned int	color;
 
 	y = map->ray->drawstart;
 	step = 1.0 * 64 / map->ray->line_height;
-	texPos = (map->ray->drawstart - WIN_Y / 2 + map->ray->line_height / 2)
+	texpos = (map->ray->drawstart - WIN_Y / 2 + map->ray->line_height / 2)
 		* step;
 	while (y < map->ray->drawend)
 	{
-		// cant be 64 needs to be the difference depending on how far you-re
-		texY = (int)texPos & (64-1);
-		texPos += step;
-		color = ft_get_pixel_color(texture, x, texY);
+		texy = (int)texpos & (64 - 1);
+		texpos += step;
+		color = ft_get_pixel_color(texture, x, texy);
 		ft_pixel_drawing(map->mlx, x, y, color);
 		y++;
 	}
@@ -47,10 +46,10 @@ void	draw_wall_colors(t_map *map, int x, int color)
 	}
 }
 
+// side = 1 vertical WALLS
+// stepY think of it was TAN
 void	draw_walls(t_map *map, int x)
 {
-	// side = 1 vertical WALLS
-	// stepY think of it was TAN
 	if (map->ray->side == 1)
 	{
 		if (map->ray->stepy > 0)
@@ -60,14 +59,14 @@ void	draw_walls(t_map *map, int x)
 	}
 	else if (map->ray->side == 0)
 	{
-		if (map->ray->rayDirX < 0 && map->ray->stepx < 0)
+		if (map->ray->raydir_x < 0 && map->ray->stepx < 0)
 			draw_wall_textures(map, map->texture->east, x);
 		else
 			draw_wall_textures(map, map->texture->west, x);
 	}
 }
 
-void    draw_roof_floor(t_map *map, int x)
+void	draw_roof_floor(t_map *map, int x)
 {
 	int	y;
 
