@@ -50,7 +50,6 @@ void printf_struct_map(t_map *map)
 	printf("      \e[1;34mMAIN-TEXTURE:\033[0m%c\n", \
 		map->texture->player_direction);
 	printf("--------------------------\n");
-
 }
 
 void printf_struct_player(t_play *play)

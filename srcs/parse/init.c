@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 18:36:24 by ifreire-          #+#    #+#             */
+/*   Updated: 2023/08/17 19:10:56 by ifreire-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	create_trgb(int t, int r, int g, int b)
@@ -15,7 +27,7 @@ void	map_rgb(t_data *data, t_texture *texture)
 		ft_atoi(data->c_arr[1]), ft_atoi(data->c_arr[2]));
 }
 
-void	init_player(t_data *data, t_play *play)
+void	init_player1(t_data *data, t_play *play)
 {
 	play->posX = data->player_x + 0.5;
 	play->posY = data->player_y + 0.5;
@@ -33,7 +45,12 @@ void	init_player(t_data *data, t_play *play)
 		play->plane_x = -0.66;
 		play->plane_y = 0;
 	}
-	else if (data->direction == EAST)
+	init_player_rest(data, play);
+}
+
+void	init_player_rest(t_data *data, t_play *play)
+{
+	if (data->direction == EAST)
 	{
 		play->dir_x = -1;
 		play->dir_y = 0;
@@ -79,5 +96,5 @@ void	init_structs(t_map *map)
 	map->map = map->data->map;
 	map->map[map->data->player_y][map->data->player_x] = '0';
 	init_textured(map->data, map->texture);
-	init_player(map->data, map->play);
+	init_player1(map->data, map->play);
 }

@@ -160,9 +160,10 @@ typedef struct s_character
 
 void		init_structs(t_map *map);
 void		init_textured(t_data *data, t_texture *texture);
-void 		init_player(t_data *data, t_play *play);
 int			create_trgb(int t, int r, int g, int b);
 void 		map_rgb(t_data *data, t_texture *texture);
+void		init_player_rest(t_data *data, t_play *play);
+void		init_player1(t_data *data, t_play *play);
 
 // ft_split.c //
 static int	n_palavras(char *s, char c, int i);
@@ -186,19 +187,27 @@ void		printf_paths(t_data *data);
 void		printf_struct_map(t_map *map);
 void 		printf_struct_player(t_play *play);
 
-// rgb_path_parse.c //
-void 		rgb_path_parse1(t_data *data, char *b, int i);
-void 		rgb_path_parse2(t_data *data);
-void 		rgb_path_parse3(t_data *data);
-char 		*give_mem_char(char *dest, char *src);
-
 // main_parse.c //
-void		main_parse(t_data *data);
-void		arg_parse(t_data *data);
-void		map_check_char(t_data *data);
-void		map_array(t_data *data);
-void		map_array_strings(t_data *data);
-void 		map_flood_fill(t_data *data);
+int			parse_map_chars_utils(t_data *data, int x, int y, int c);
+void		parse_map_caracthers(t_data *data);
+char		*isspace_file2(t_data *data, char *str, int ind, int i);
+char		*isspace_file1(t_data *data, int ind, int z);
+void		paths_creation_parse(t_data *data);
+int			path_utils(char *str);
+void		check_if_path_valid(t_data *data);
+char		*path_creation(t_data *data, int i, int value);
+void		map_creation(t_data *data, int i);
+int			parse_path(t_data *data);
+void		file_name_parse(t_data *data);
+void		reading_file(t_data *data, int fd, int index);
+void		file_array(t_data *data);
+void		init_data(t_data *data, char **argv);
+void		main_parse(t_data *data, char **argv);
+void		paths_parse_caracthers(t_data *data, int i);
+void		map_flood_fill(t_data *data);
+void		map_closed_by_walls(t_data *data, int x, int y);
+int			*map_vector_dy(void);
+int			*map_vector_dx(void);
 
 // parse_utils.c //
 void		*ft_memset(void *b, int c, size_t len);
