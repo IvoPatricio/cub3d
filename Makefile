@@ -6,7 +6,7 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/17 22:00:59 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/17 23:31:10 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ SRC			= srcs/main.c \
 			srcs/parse/parse_map_flood_fill.c \
 			srcs/parse/parse_path_data.c \
 			srcs/parse/parse_path_file.c \
-			srcs/execution/init_text_player.c \
-			srcs/execution/init_rgb.c \
 			srcs/utils/utils_malloc.c \
 			srcs/utils/libft/utils_parse_1.c \
 			srcs/utils/libft/utils_parse_2.c \
@@ -29,7 +27,15 @@ SRC			= srcs/main.c \
 			srcs/utils/utils_printf.c \
 			srcs/utils/utils_free.c \
 			srcs/utils/get_next_line/get_next_line.c \
-			srcs/utils/get_next_line/get_next_line_utils.c
+			srcs/utils/get_next_line/get_next_line_utils.c \
+			srcs/execution/init_rgb.c \
+			srcs/execution/init_textures_of_mlx.c \
+			srcs/execution/init_textures_player.c \
+			srcs/execution/mlx_angle_close.c \
+			srcs/execution/mlx_draw_raycast.c \
+			srcs/execution/mlx_keys.c \
+			srcs/execution/mlx_put_pixel.c \
+			srcs/execution/raycast_lodev_dda.c
 OBJ			= $(SRC:.c=.o)
 MLX_PATH	= ./mini-linux
 

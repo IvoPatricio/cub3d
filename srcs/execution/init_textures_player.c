@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_text_player.c                                 :+:      :+:    :+:   */
+/*   init_textures_player.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 18:36:24 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 21:57:59 by ifreire-         ###   ########.fr       */
+/*   Created: 2023/08/17 23:29:24 by ifreire-          #+#    #+#             */
+/*   Updated: 2023/08/17 23:46:23 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_player1(t_data *data, t_play *play)
 {
-	play->posX = data->player_x + 0.5;
-	play->posY = data->player_y + 0.5;
+	play->pos_x = data->player_x + 0.5;
+	play->pos_y = data->player_y + 0.5;
 	if (data->direction == NORTH)
 	{
 		play->dir_x = 0;

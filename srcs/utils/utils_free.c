@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 23:39:44 by ifreire-          #+#    #+#             */
+/*   Updated: 2023/08/17 23:41:55 by ifreire-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	free_map(t_data *data)
@@ -16,6 +28,13 @@ void	free_map(t_data *data)
 	}
 	if (data->map)
 		free(data->map);
+	free_rest_map(data);
+}
+
+void	free_rest_map(t_data *data)
+{
+	int	i;
+
 	if (data->f_arr)
 	{
 		i = 0;

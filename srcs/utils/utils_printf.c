@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_printf.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 23:39:58 by ifreire-          #+#    #+#             */
+/*   Updated: 2023/08/17 23:46:23 by ifreire-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-void printf_error(t_data *data, const char *str)
+void	printf_error(t_data *data, const char *str)
 {
-	perror("\e[1;31mERROR");  
+	perror("\e[1;31mERROR");
 	printf("\e[0;0m\e[0;34m%s\n\e[0;0m", str);
 	free_map(data);
 	exit(0);
 }
 
-void printf_map(t_data *data)
+void	printf_map(t_data *data)
 {
 	int	i;
 
@@ -21,7 +33,7 @@ void printf_map(t_data *data)
 	}
 }
 
-void printf_paths(t_data *data)
+void	printf_paths(t_data *data)
 {
 	int	i;
 
@@ -38,7 +50,7 @@ void printf_paths(t_data *data)
 		printf("%s\n", data->c_arr[i++]);
 }
 
-void printf_struct_map(t_map *map)
+void	printf_struct_map(t_map *map)
 {
 	printf("\n---------\e[1;34mTEXTURES\033[0m---------");
 	printf("\nTexture_East:%s\n", map->texture->e);
@@ -47,12 +59,12 @@ void printf_struct_map(t_map *map)
 	printf("Texture_West:%s\n", map->texture->w);
 	printf("RGB-Texture->floor:%d\n", map->texture->floor);
 	printf("RGB-Texture->roof:%d\n\n", map->texture->roof);
-	printf("      \e[1;34mMAIN-TEXTURE:\033[0m%c\n", \
+	printf("      \e[1;34mMAIN-TEXTURE:\033[0m%c\n",
 		map->texture->player_direction);
 	printf("--------------------------\n");
 }
 
-void printf_struct_player(t_play *play)
+void	printf_struct_player(t_play *play)
 {
 	printf("\n\n---------------\n\n");
 	printf("%fplay->dir_x\n", play->dir_x);
@@ -61,7 +73,7 @@ void printf_struct_player(t_play *play)
 	printf("%fplay->old_plane_x\n", play->old_plane_x);
 	printf("%fplay->plane_x\n", play->plane_x);
 	printf("%fplay->plane_y\n", play->plane_y);
-	printf("%fplay->posX\n", play->posX);
-	printf("%fplay->posY\n", play->posY);
+	printf("%fplay->pos_x\n", play->pos_x);
+	printf("%fplay->pos_y\n", play->pos_y);
 	printf("\n\n---------------\n\n");
 }
