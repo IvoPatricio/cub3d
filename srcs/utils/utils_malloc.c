@@ -26,7 +26,7 @@ void	array_malloc_error(t_data *data, char **a)
 
 void	struct_malloc_error(t_map *map, const void *random, size_t size)
 {
-	if (!random)
+	if (!random || size <= 0)
 	{
 		printf("\e[1;31mERROR\n\e[0;0m");
 		printf("\e[0;34m\n\e[0;0m Struct Allocation Failed");

@@ -19,8 +19,6 @@ int	create_trgb(int t, int r, int g, int b)
 
 void	map_rgb(t_data *data, t_texture *texture)
 {
-	char	*arr;
-
 	texture->floor = create_trgb(0, ft_atoi(data->f_arr[0]), \
 		ft_atoi(data->f_arr[1]), ft_atoi(data->f_arr[2]));
 	texture->roof = create_trgb(0, ft_atoi(data->f_arr[0]), \

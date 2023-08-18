@@ -20,9 +20,9 @@ int mouse_hook(t_map *map)
     mlx_mouse_get_pos(map->mlx->mlx_ptr, map->mlx->win_ptr, &x, &y);
     if (x != map->mousex)
     {
-		if (x >= ((WIN_X/2) + 30))
+		if (x >= ((WIN_X/2) + 10))
 			ft_key_angle(map, (double)ROTATE_SPEED);
-		else if (x <= ((WIN_X/2) - 30))
+		else if (x <= ((WIN_X/2) - 10))
 			ft_key_angle(map, -(double)ROTATE_SPEED);
         map->mousex = x;
     }

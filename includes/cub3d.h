@@ -17,8 +17,8 @@
 // GAME SETTINGS //
 # define WIN_X 800
 # define WIN_Y 640
-# define ROTATE_SPEED 0.4
-# define PLAYER_SPEED 0.2
+# define ROTATE_SPEED 0.3
+# define PLAYER_SPEED 0.1
 
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
@@ -277,7 +277,6 @@ int							ft_isdigit(int c);
 int							ft_isspace(char src);
 
 // ft_split.c //
-static int					n_palavras(char *s, char c, int i);
 int							delimiter(char *s, char c);
 int							n_array(char *s, char c);
 char						**junction_strs(char *s, char c, int i);

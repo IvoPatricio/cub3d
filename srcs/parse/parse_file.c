@@ -59,13 +59,10 @@ void	reading_file(t_data *data, int fd, int index)
 */
 void	file_array(t_data *data)
 {
-	char	*b;
 	int		fd;
-	int		i;
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd != -1)
 		reading_file(data, fd, 0);
-	i = 0;
 	close(fd);
 }
