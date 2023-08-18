@@ -6,12 +6,18 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:50 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:03:18 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:23:14 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief parse_map_chars_utils: Checks if the matrix of the map contains any invalid caracthers
+ * (or not allowed)
+ * @result else if there's an error everything on the heap will be freed and the program
+ * terminates with an error
+*/
 int	parse_map_chars_utils(t_data *data, int x, int y, int c)
 {
 	if (data->map[y][x] != '\n' && data->map[y][x] != FLOOR
@@ -37,6 +43,11 @@ int	parse_map_chars_utils(t_data *data, int x, int y, int c)
 	return (c);
 }
 
+/**
+ * @brief parse_map_caracthers: Checks if the matrix of the map only one player
+ * @result else if there's an error everything on the heap will be freed and the program
+ * terminates with an error
+*/
 void	parse_map_caracthers(t_data *data)
 {
 	int	x;
@@ -60,6 +71,10 @@ void	parse_map_caracthers(t_data *data)
 		printf_error(data, "Map Must Have Only 1 Player");
 }
 
+/**
+ * @brief map_creation: Allocates memory for the Array, and afterwards it gives
+ * the real address of each string inside argv
+*/
 void	map_creation(t_data *data, int i)
 {
 	int	x;

@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 01:26:02 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 01:33:26 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	draw_wall_colors(t_map *map, int x, int color)
 // stepY think of it was TAN
 void	draw_walls(t_map *map, int x)
 {
+	printf("%f\n", map->ray->wallhit);
 	if (map->ray->side == 1)
 	{
 		if (map->ray->stepy > 0)
@@ -61,7 +62,7 @@ void	draw_walls(t_map *map, int x)
 	}
 	else if (map->ray->side == 0)
 	{
-		if (map->ray->raydir_x < 0 && map->ray->stepx < 0)
+		if (map->ray->stepx < 0)
 			draw_wall_textures(map, map->texture->east, x);
 		else
 			draw_wall_textures(map, map->texture->west, x);

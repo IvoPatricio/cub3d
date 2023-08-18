@@ -6,12 +6,17 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:44 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 18:42:59 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:23:19 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief file_name_parse: it's making sure the path to the file is valid and if the file is .cub
+ * @result else if there's an error everything on the heap will be freed and the program
+ * terminates with an error
+*/
 void	file_name_parse(t_data *data)
 {
 	int	x;
@@ -21,7 +26,7 @@ void	file_name_parse(t_data *data)
 	if (fd == -1)
 	{
 		data->argv = NULL;
-		printf_error(data, "Invalid File map");
+		printf_error(data, "Invalid File");
 	}
 	x = ft_strlen(data->argv[1]);
 	if ((data->argv[1][x - 1] != 'b') || (data->argv[1][x - 2] != 'u')
@@ -33,6 +38,9 @@ void	file_name_parse(t_data *data)
 	close(fd);
 }
 
+/**
+ * @brief reading_file: dynamically allocates memory of an array of strings using recursivity
+*/
 void	reading_file(t_data *data, int fd, int index)
 {
 	char	*line;
@@ -46,6 +54,9 @@ void	reading_file(t_data *data, int fd, int index)
 		data->argv[index] = line;
 }
 
+/**
+ * @brief file_array: checks if is the EndOfFile, else it calls read_file, closing the FD when it reachs the end
+*/
 void	file_array(t_data *data)
 {
 	char	*b;

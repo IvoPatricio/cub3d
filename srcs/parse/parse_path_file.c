@@ -6,18 +6,28 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:03 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 21:52:30 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 03:06:05 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief path_creation: Increments map_time because there can only be 4 paths + 2 RGB
+ * @return returns the new modified string
+*/
 char	*path_creation(t_data *data, int i, int value)
 {
 	data->map_time++;
 	return (isspace_file1(data, i, value));
 }
 
+/**
+ * @brief isspace_file2: Creates an allocation while taking in consideration how many 
+ * spaces/tabs the string had previously and remove the first 4 letters if N/S/W/E or 
+ * the first letter if floor/celling
+ * @return returns the new modified string
+*/
 char	*isspace_file2(t_data *data, char *str, int ind, int i)
 {
 	int	x;
@@ -45,6 +55,10 @@ char	*isspace_file2(t_data *data, char *str, int ind, int i)
 	return (data->argv[ind]);
 }
 
+/**
+ * @brief isspace_file1: Counts all the spaces from the string, works as an isspace for strings
+ * @return returns the new modified string
+*/
 char	*isspace_file1(t_data *data, int ind, int z)
 {
 	char	*str;
@@ -68,6 +82,12 @@ char	*isspace_file1(t_data *data, int ind, int z)
 	return (isspace_file2(data, str, ind, i));
 }
 
+/**
+ * @brief parse_path: Removes spaces/tabs/newlines from an array of strings
+ * till it parsed all different paths and compares the first letters necessary
+ * for the creation of the paths or there wont be one
+ * @return the position I(Y) in the Array
+*/
 int	parse_path(t_data *data)
 {
 	int	i;
@@ -91,7 +111,7 @@ int	parse_path(t_data *data)
 		i++;
 	}
 	if (data->map_time < 6)
-		printf_error(data, "Invalid File Variables");
+		printf_error(data, "Invalid File Paths Variables");
 	check_if_path_valid(data);
 	paths_creation_parse(data);
 	return (i);

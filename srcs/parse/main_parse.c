@@ -6,23 +6,15 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:38 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:57:16 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:23:33 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
- * @brief function who returns the size of a string
- * @param str ptr on char
- * @return integer that defines lenght str
-int	ft_strlen(char *str)
-{
-	int i =0;
-	while (str[i])
-		i++;
-	return (i);
-}*/
+/**
+ * @brief Init_data: Sets the values of struct data to NULL pointers
+*/
 void	init_data(t_data *data, char **argv)
 {
 	data->argv = argv;
@@ -38,6 +30,10 @@ void	init_data(t_data *data, char **argv)
 	data->map_time = 0;
 }
 
+/**
+ * @brief Main_parse: Calls other functions to parse the file, paths, rgb colours & map
+ * @result If any function gives an error the program will give an error in STDERR and exit
+*/
 void	main_parse(t_data *data, char **argv)
 {
 	int	i;
