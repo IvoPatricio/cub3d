@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:25 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:44:17 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 00:40:40 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	ft_mlx_init(t_map *map)
 			free_structs_mlx(map);
 		}
 		raydrawing(map);
+		mlx_mouse_show(map->mlx->mlx_ptr, map->mlx->win_ptr);
+		mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr,1, 1);
+		//mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2, \
+			(int)WIN_Y / 2);
+		mlx_do_key_autorepeaton(map->mlx->mlx_ptr);
 		mlx_hook(map->mlx->win_ptr, 2, 1, ft_keys, map);
 		mlx_hook(map->mlx->win_ptr, 17, 1L << 17, ft_destroyer, map);
 		mlx_hook(map->mlx->win_ptr, 33, 1L << 17, ft_destroyer, map);

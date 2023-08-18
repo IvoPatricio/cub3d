@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:59:31 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 01:26:02 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 {
 	int				y;
+	int				texy;
+	int				texx;
 	double			step;
 	double			texpos;
-	int				texy;
-	unsigned int	color;
 
 	y = map->ray->drawstart;
 	step = 1.0 * 64 / map->ray->line_height;
 	texpos = (map->ray->drawstart - WIN_Y / 2 + map->ray->line_height / 2)
 		* step;
+	texx = (int)(map->ray->wallhit * (double)(texture->x));
+	texx = texture->x - texx - 1;
 	while (y < map->ray->drawend)
 	{
 		texy = (int)texpos & (64 - 1);
 		texpos += step;
-		color = ft_get_pixel_color(texture, x, texy);
-		ft_pixel_drawing(map->mlx, x, y, color);
+		ft_pixel_drawing(map->mlx, x, y, \
+			ft_get_pixel_color(texture, texx, texy));
 		y++;
 	}
 }
