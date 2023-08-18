@@ -17,8 +17,8 @@
 // GAME SETTINGS //
 # define WIN_X 800
 # define WIN_Y 640
-# define ROTATE_SPEED 0.2
-# define PLAYER_SPEED 0.1
+# define ROTATE_SPEED 0.4
+# define PLAYER_SPEED 0.2
 
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
