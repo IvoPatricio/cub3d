@@ -6,11 +6,27 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 01:33:26 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 03:20:51 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+void	draw_minimap(t_data *data, int x, int y)
+{
+	int player;
+
+	//printf("X:%d\n", x);
+	//printf("X:%d\n", y);
+	//printf("%c\n", data->map[x][y]);
+	if (data->map[x][y] == '1')
+	{
+		printf("aaa\n");
+	}
+	else
+		printf("abbbba\n");
+}*/
 
 void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 {
@@ -52,7 +68,6 @@ void	draw_wall_colors(t_map *map, int x, int color)
 // stepY think of it was TAN
 void	draw_walls(t_map *map, int x)
 {
-	printf("%f\n", map->ray->wallhit);
 	if (map->ray->side == 1)
 	{
 		if (map->ray->stepy > 0)

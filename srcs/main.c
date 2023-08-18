@@ -12,8 +12,29 @@
 
 #include "../includes/cub3d.h"
 
+int mouse_hook(t_map *map)
+{
+    int x;
+	int y;
+
+    mlx_mouse_get_pos(map->mlx->mlx_ptr, map->mlx->win_ptr, &x, &y);
+    if (x != map->mousex)
+    {
+		if (x >= ((WIN_X/2) + 30))
+			ft_key_angle(map, (double)ROTATE_SPEED);
+		else if (x <= ((WIN_X/2) - 30))
+			ft_key_angle(map, -(double)ROTATE_SPEED);
+        map->mousex = x;
+    }
+	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2, \
+		(int)WIN_Y / 2);
+	raydrawing(map);
+    return (0);
+}
+
 void	ft_mlx_init(t_map *map)
 {
+	map->mousex = (int)WIN_X / 2;
 	map->mlx->mlx_ptr = mlx_init();
 	if (map->mlx->mlx_ptr != 0)
 	{
@@ -29,11 +50,9 @@ void	ft_mlx_init(t_map *map)
 			printf("Error\nMlx_Buffer Allocation Failed");
 			free_structs_mlx(map);
 		}
-		raydrawing(map);
 		mlx_mouse_show(map->mlx->mlx_ptr, map->mlx->win_ptr);
-		mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr,1, 1);
-		//mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2, \
-			(int)WIN_Y / 2);
+		mlx_loop_hook(map->mlx->mlx_ptr, mouse_hook, map);
+		raydrawing(map);
 		mlx_do_key_autorepeaton(map->mlx->mlx_ptr);
 		mlx_hook(map->mlx->win_ptr, 2, 1, ft_keys, map);
 		mlx_hook(map->mlx->win_ptr, 17, 1L << 17, ft_destroyer, map);

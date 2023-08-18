@@ -52,5 +52,5 @@ void	ft_key_angle(t_map *map, double rotate)
 	old_plane_x = play->plane_x;
 	play->plane_x = play->plane_x * cos(rotate) - play->plane_y * sin(rotate);
 	play->plane_y = old_plane_x * sin(rotate) + play->plane_y * cos(rotate);
-	printf_struct_player(play);
+	//printf_struct_player(play);
 }

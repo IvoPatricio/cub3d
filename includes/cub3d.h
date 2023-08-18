@@ -61,7 +61,8 @@ typedef struct s_mlx		t_mlx;
 typedef struct s_map
 {
 	char					**map;
-	void					*aaa;
+	int						mousex;
+	int						mousey;				
 	t_play					*play;
 	t_ray					*ray;
 	t_texture				*texture;
