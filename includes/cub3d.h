@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:45:02 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 07:04:12 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:35:12 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ typedef struct s_character
 int							main(int argc, char **argv);
 void						ft_mlx_init(t_map *map);
 int							mouse_hook(t_map *map);
-
 
 // init_rgb.c //
 int							create_trgb(int t, int r, int g, int b);
