@@ -6,16 +6,16 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:02:21 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 02:16:10 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:30:15 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /**
- * @brief map_vector_dx: Sadly 42 doesnt allow dx[3] = {1,0,-1}. This function
- * allocates each X position like a vector when combined with Y
- * @result returns DX with vector like values
+ * @brief map_vector_dx: Sadly 42 doesnt allow dx[3] = {1,0,-1}. This 
+ * function allocates each X position like a vector when combined with Y
+ * @result returns DX with position values
 */
 int	*map_vector_dx(void)
 {
@@ -35,9 +35,9 @@ int	*map_vector_dx(void)
 }
 
 /**
- * @brief map_vector_dy: Sadly 42 doesnt allow dy[3] = {1,0,-1}. This function
- * allocates each Y position like a vector when combined with X
- * @result returns DY with vector like values
+ * @brief map_vector_dy: Sadly 42 doesnt allow dy[3] = {1,0,-1}. This 
+ * function allocates each Y position like a vector when combined with X
+ * @result returns DY with position values
 */
 int	*map_vector_dy(void)
 {
@@ -57,9 +57,10 @@ int	*map_vector_dy(void)
 }
 
 /**
- * @brief map_closed_by_walls: Check if the map is closed by walls using "vectors"
- * making sure the player position or the floors positions is always surrounded
- * by walls, freeing the "vectors" when the function finishs
+ * @brief map_closed_by_walls: Check if the map is closed by walls 
+ * using "vectors" making sure the player position or the floors 
+ * positions is always surrounded by walls, freeing the "vectors" 
+ * when the function finishs
 */
 void	map_closed_by_walls(t_data *data, int x, int y)
 {
@@ -85,8 +86,8 @@ void	map_closed_by_walls(t_data *data, int x, int y)
 }
 
 /**
- * @brief map_flood_fill: Checks if the map is closed by walls using the player
- * or floor position
+ * @brief map_flood_fill: Checks if the map is closed by walls using 
+ * the player or floor position
 */
 void	map_flood_fill(t_data *data)
 {

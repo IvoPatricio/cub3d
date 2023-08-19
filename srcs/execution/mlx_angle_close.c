@@ -6,12 +6,17 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:32 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 00:29:33 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:31:49 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief ft_destroy_images_display_free: Destroys all the images 
+ * allocated on the mlx and the display of mlx also freeing the
+ * textures->mlx of walls
+*/
 void	ft_destroy_images_display_free(t_map *map)
 {
 	mlx_destroy_image(map->mlx->mlx_ptr, map->mlx->img_to_window);
@@ -30,6 +35,11 @@ void	ft_destroy_images_display_free(t_map *map)
 		free(map->texture->west);
 }
 
+/**
+ * @brief ft_destroyer: destroys the window of mlx, calls the function
+ * that destroys the mlx images, frees the mlx_ptr, and frees the whole
+ * project afterwards
+*/
 int	ft_destroyer(t_map *map)
 {
 	mlx_destroy_window(map->mlx->mlx_ptr, map->mlx->win_ptr);
@@ -39,11 +49,14 @@ int	ft_destroyer(t_map *map)
 	exit(1);
 }
 
+/**
+ * @brief
+*/
 void	ft_key_angle(t_map *map, double rotate)
 {
-    t_play  *play;
-    double  old_dir_x;
-    double  old_plane_x;
+	double	old_plane_x;
+	double	old_dir_x;
+	t_play	*play;
 
 	play = map->play;
 	old_dir_x = play->dir_x;
@@ -52,5 +65,4 @@ void	ft_key_angle(t_map *map, double rotate)
 	old_plane_x = play->plane_x;
 	play->plane_x = play->plane_x * cos(rotate) - play->plane_y * sin(rotate);
 	play->plane_y = old_plane_x * sin(rotate) + play->plane_y * cos(rotate);
-	//printf_struct_player(play);
 }

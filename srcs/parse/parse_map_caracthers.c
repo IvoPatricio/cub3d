@@ -6,17 +6,17 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:50 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 02:23:14 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:29:24 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /**
- * @brief parse_map_chars_utils: Checks if the matrix of the map contains any invalid caracthers
- * (or not allowed)
- * @result else if there's an error everything on the heap will be freed and the program
- * terminates with an error
+ * @brief parse_map_chars_utils: Checks if the matrix of the map 
+ * contains any invalid caracthers (or not allowed)
+ * @result else if there's an error everything on the heap will be 
+ * freed and the program terminates with an error
 */
 int	parse_map_chars_utils(t_data *data, int x, int y, int c)
 {
@@ -44,9 +44,10 @@ int	parse_map_chars_utils(t_data *data, int x, int y, int c)
 }
 
 /**
- * @brief parse_map_caracthers: Checks if the matrix of the map only one player
- * @result else if there's an error everything on the heap will be freed and the program
- * terminates with an error
+ * @brief parse_map_caracthers: Checks if the matrix of the map only 
+ * one player
+ * @result else if there's an error everything on the heap will be 
+ * freed and the program terminates with an error
 */
 void	parse_map_caracthers(t_data *data)
 {
@@ -72,8 +73,8 @@ void	parse_map_caracthers(t_data *data)
 }
 
 /**
- * @brief map_creation: Allocates memory for the Array, and afterwards it gives
- * the real address of each string inside argv
+ * @brief map_creation: Allocates memory for the Array, and 
+ * afterwards it gives the real address of each string inside argv
 */
 void	map_creation(t_data *data, int i)
 {

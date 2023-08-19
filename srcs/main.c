@@ -6,30 +6,30 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:25 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 00:40:40 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 05:56:51 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int mouse_hook(t_map *map)
+int	mouse_hook(t_map *map)
 {
-    int x;
-	int y;
+	int	x;
+	int	y;
 
-    mlx_mouse_get_pos(map->mlx->mlx_ptr, map->mlx->win_ptr, &x, &y);
-    if (x != map->mousex)
-    {
-		if (x >= ((WIN_X/2) + 10))
+	mlx_mouse_get_pos(map->mlx->mlx_ptr, map->mlx->win_ptr, &x, &y);
+	if (x != map->mousex)
+	{
+		if (x >= ((WIN_X / 2) + ((int)MOUSE_SPEED * 10)))
 			ft_key_angle(map, (double)ROTATE_SPEED);
-		else if (x <= ((WIN_X/2) - 10))
+		else if (x <= ((WIN_X / 2) - ((int)MOUSE_SPEED * 10)))
 			ft_key_angle(map, -(double)ROTATE_SPEED);
-        map->mousex = x;
-    }
-	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2, \
+		map->mousex = x;
+	}
+	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2,
 		(int)WIN_Y / 2);
 	raydrawing(map);
-    return (0);
+	return (0);
 }
 
 void	ft_mlx_init(t_map *map)

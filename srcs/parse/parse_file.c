@@ -6,16 +6,17 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:44 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 02:23:19 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:26:08 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /**
- * @brief file_name_parse: it's making sure the path to the file is valid and if the file is .cub
- * @result else if there's an error everything on the heap will be freed and the program
- * terminates with an error
+ * @brief file_name_parse: it's making sure the path to the file is 
+ * valid and if the file is .cub
+ * @result else if there's an error everything on the heap will be 
+ * freed and the program terminates with an error
 */
 void	file_name_parse(t_data *data)
 {
@@ -39,7 +40,8 @@ void	file_name_parse(t_data *data)
 }
 
 /**
- * @brief reading_file: dynamically allocates memory of an array of strings using recursivity
+ * @brief reading_file: dynamically allocates memory of an array of 
+ * strings using recursivity
 */
 void	reading_file(t_data *data, int fd, int index)
 {
@@ -55,7 +57,8 @@ void	reading_file(t_data *data, int fd, int index)
 }
 
 /**
- * @brief file_array: checks if is the EndOfFile, else it calls read_file, closing the FD when it reachs the end
+ * @brief file_array: checks if is the EndOfFile, else it calls 
+ * read_file, closing the FD when it reachs the end
 */
 void	file_array(t_data *data)
 {

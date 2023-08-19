@@ -6,16 +6,17 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:57 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 02:23:00 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 00:03:12 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /**
- * @brief paths_parse_caracthers: Checks if the array of strings has a non integer value
- * @result if there's an non integer everything on the heap will be freed and the program
- * terminates with an error
+ * @brief paths_parse_caracthers: Checks if the array of strings has 
+ * a non integer value
+ * @result if there's an non integer everything on the heap will be 
+ * freed and the program terminates with an error
 */
 void	paths_parse_caracthers(t_data *data, int i)
 {
@@ -40,10 +41,11 @@ void	paths_parse_caracthers(t_data *data, int i)
 }
 
 /**
- * @brief paths_creation_parse: Separates the values of RGB in an Array of strings
- * and afterwards it checks if the RGB value is between 0-255
- * @result else if there's an error everything on the heap will be freed and the program
- * terminates with an error
+ * @brief paths_creation_parse: Separates the values of RGB in an 
+ * Array of strings and afterwards it checks if the RGB value is 
+ * between 0-255 
+ * @result else if there's an error everything on the heap will be 
+ * freed and the program terminates with an error
 */
 void	paths_creation_parse(t_data *data)
 {
@@ -65,8 +67,9 @@ void	paths_creation_parse(t_data *data)
 
 /**
  * @brief path_utils: if open returns -1 it means the path doesnt exist
- * @result if path_utils returns -1 check_if_path_valid will terminate the program with
- * an error else it will keep executing till it finds an error or it is manually terminated
+ * @result if path_utils returns -1 check_if_path_valid will terminate
+ * the program with an error else it will keep executing till it finds an 
+ * error or it is manually terminated
 */
 int	path_utils(char *str)
 {
@@ -80,9 +83,10 @@ int	path_utils(char *str)
 }
 
 /**
- * @brief check_if_path_valid: Checks if the paths inside the string are valid
- * @result else if there's an error everything on the heap will be freed and the program
- * terminates with an error
+ * @brief check_if_path_valid: Checks if the paths inside the string 
+ * are valid
+ * @result else if there's an error everything on the heap will be 
+ * freed and the program terminates with an error
 */
 void	check_if_path_valid(t_data *data)
 {

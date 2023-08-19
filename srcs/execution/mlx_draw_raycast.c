@@ -6,27 +6,11 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 03:20:51 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:32:53 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/*
-void	draw_minimap(t_data *data, int x, int y)
-{
-	int player;
-
-	//printf("X:%d\n", x);
-	//printf("X:%d\n", y);
-	//printf("%c\n", data->map[x][y]);
-	if (data->map[x][y] == '1')
-	{
-		printf("aaa\n");
-	}
-	else
-		printf("abbbba\n");
-}*/
 
 void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 {
@@ -52,20 +36,9 @@ void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 	}
 }
 
-void	draw_wall_colors(t_map *map, int x, int color)
-{
-	int	y;
-
-	y = map->ray->drawstart;
-	while (y < map->ray->drawend)
-	{
-		ft_pixel_drawing(map->mlx, x, y, color);
-		y++;
-	}
-}
-
-// side = 1 vertical WALLS
-// stepY think of it was TAN
+/**
+ * @brief draw_walls: 
+*/
 void	draw_walls(t_map *map, int x)
 {
 	if (map->ray->side == 1)
@@ -111,6 +84,7 @@ void	raydrawing(t_map *map)
 		draw_walls(map, x);
 		x++;
 	}
+	minimap(map);
 	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win_ptr,
 		map->mlx->img_to_window, 0, 0);
 }

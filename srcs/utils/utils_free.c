@@ -6,12 +6,15 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:39:44 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:41:55 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 05:32:28 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief Free_map: Frees the struct of data
+*/
 void	free_map(t_data *data)
 {
 	int	i;
@@ -31,6 +34,9 @@ void	free_map(t_data *data)
 	free_rest_map(data);
 }
 
+/**
+ * @brief free_rest_map: Frees the struct of data (continuation of free_map)
+*/
 void	free_rest_map(t_data *data)
 {
 	int	i;
@@ -59,6 +65,9 @@ void	free_rest_map(t_data *data)
 		free(data);
 }
 
+/**
+ * @brief Frees the structs and data of the program
+*/
 void	free_structs_mlx(t_map *map)
 {
 	free_map(map->data);

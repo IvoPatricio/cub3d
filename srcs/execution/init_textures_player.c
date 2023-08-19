@@ -6,12 +6,16 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:29:24 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/17 23:46:23 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:28:02 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief init_player1: Sets different values on the struct player
+ * depending on the starter direction
+*/
 void	init_player1(t_data *data, t_play *play)
 {
 	play->pos_x = data->player_x + 0.5;
@@ -33,6 +37,10 @@ void	init_player1(t_data *data, t_play *play)
 	init_player_rest(data, play);
 }
 
+/**
+ * @brief init_player_rest: Sets different values on the struct player
+ * depending on the starter direction
+*/
 void	init_player_rest(t_data *data, t_play *play)
 {
 	if (data->direction == EAST)
@@ -51,6 +59,11 @@ void	init_player_rest(t_data *data, t_play *play)
 	}
 }
 
+/**
+ * @brief init_textured: saves the values of the variables
+ * to the struct texture, even tho it wasnt needed :laugh:
+ * just easier for the printf structs
+*/
 void	init_textured(t_data *data, t_texture *texture)
 {
 	texture->n = data->no;
@@ -68,6 +81,12 @@ void	init_textured(t_data *data, t_texture *texture)
 	map_rgb(data, texture);
 }
 
+/**
+ * @brief init_structs: allocates memory for the structs needed for the
+ * raycasting, mlx, player and textures so everything can be accessible 
+ * using a single struct MAP, and sets the old position of the player
+ * block to a floor
+*/
 void	init_structs(t_map *map)
 {
 	map->texture = malloc(sizeof(t_texture));
@@ -79,7 +98,7 @@ void	init_structs(t_map *map)
 	map->mlx = malloc(sizeof(t_mlx));
 	struct_malloc_error(map, map->mlx, sizeof(map->mlx));
 	map->map = map->data->map;
-	map->map[map->data->player_y][map->data->player_x] = '0';
+	map->map[map->data->player_y][map->data->player_x] = FLOOR;
 	init_textured(map->data, map->texture);
 	init_player1(map->data, map->play);
 }

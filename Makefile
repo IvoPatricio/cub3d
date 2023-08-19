@@ -6,12 +6,12 @@
 #    By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 11:57:44 by mrudloff          #+#    #+#              #
-#    Updated: 2023/08/17 23:31:10 by ifreire-         ###   ########.fr        #
+#    Updated: 2023/08/19 06:59:45 by ifreire-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3d
-CC			= gcc -Wall -Wextra -Werror -fsanitize=address -g
+CC			= gcc -fsanitize=address -g
 CFLAGS		= -I/usr/include -Imlx_linux -O3
 SRC			= srcs/main.c \
 			srcs/parse/main_parse.c \
@@ -35,6 +35,7 @@ SRC			= srcs/main.c \
 			srcs/execution/mlx_draw_raycast.c \
 			srcs/execution/mlx_keys.c \
 			srcs/execution/mlx_put_pixel.c \
+			srcs/execution/mlx_draw_minimap.c \
 			srcs/execution/raycast_lodev_dda.c
 OBJ			= $(SRC:.c=.o)
 MLX_PATH	= ./mini-linux

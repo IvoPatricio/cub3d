@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:36:38 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 02:23:33 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:25:53 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	init_data(t_data *data, char **argv)
 }
 
 /**
- * @brief Main_parse: Calls other functions to parse the file, paths, rgb colours & map
- * @result If any function gives an error the program will give an error in STDERR and exit
+ * @brief Main_parse: Calls other functions to parse the file, paths,
+ * rgb colours & map
+ * @result If any function gives an error the program will give an 
+ * error in STDERR and exit
 */
 void	main_parse(t_data *data, char **argv)
 {

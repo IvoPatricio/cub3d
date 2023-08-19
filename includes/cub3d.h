@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:45:02 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/18 00:02:01 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:04:12 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WIN_Y 640
 # define ROTATE_SPEED 0.3
 # define PLAYER_SPEED 0.1
+# define MOUSE_SPEED 1
 
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
@@ -76,7 +77,6 @@ typedef struct s_mlx
 	void					*win_ptr;
 	void					*img_to_window;
 	char					*buffer;
-	void					*test_win;
 	int						i;
 	int						a;
 	int						b;
@@ -169,6 +169,8 @@ typedef struct s_character
 // EXECUTE FUNCTIONS //
 int							main(int argc, char **argv);
 void						ft_mlx_init(t_map *map);
+int							mouse_hook(t_map *map);
+
 
 // init_rgb.c //
 int							create_trgb(int t, int r, int g, int b);
@@ -193,10 +195,15 @@ void						ft_key_angle(t_map *map, double rotate);
 // mlx_draw_raycast.c//
 void						draw_wall_textures(t_map *map, t_mlx *texture,
 								int x);
-void						draw_wall_colors(t_map *map, int x, int color);
-void						draw_walls(t_map *map, int x);
+void						draw_wall_colors(t_map *map, int x, int y, 
+								int color);
 void						draw_roof_floor(t_map *map, int x);
 void						raydrawing(t_map *map);
+
+// mlx_draw_minimap.c //
+void						draw_minimap_colors(t_map *map, int x, int y, \
+								int color);
+void						minimap(t_map *map);
 
 // mlx_keys.c//
 void						ft_key_w(t_map *map, int key_code);
