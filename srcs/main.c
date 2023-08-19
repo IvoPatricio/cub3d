@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:25 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 08:06:27 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:38:16 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ int	mouse_hook(t_map *map)
 	mlx_mouse_get_pos(map->mlx->mlx_ptr, map->mlx->win_ptr, &x, &y);
 	if (x != map->mousex)
 	{
-		if (x >= ((WIN_X / 2) + ((int)MOUSE_SPEED * 10)))
+		if (x >= ((WIN_X / 2) + ((int)MOUSE_SPEED * 10)) \
+			&& (map->data->direction == NORTH || map->data->direction == SOUTH))
 			ft_key_angle(map, (double)ROTATE_SPEED);
-		else if (x <= ((WIN_X / 2) - ((int)MOUSE_SPEED * 10)))
+		else if (x >= ((WIN_X / 2) + ((int)MOUSE_SPEED * 10)))
 			ft_key_angle(map, -(double)ROTATE_SPEED);
+		if (x <= ((WIN_X / 2) - ((int)MOUSE_SPEED * 10)) \
+			&& (map->data->direction == NORTH || map->data->direction == SOUTH))
+			ft_key_angle(map, -(double)ROTATE_SPEED);
+		else if (x <= ((WIN_X / 2) - ((int)MOUSE_SPEED * 10)))
+			ft_key_angle(map, (double)ROTATE_SPEED);
 		map->mousex = x;
 	}
 	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2,
