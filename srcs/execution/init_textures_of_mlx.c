@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 07:24:37 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 08:26:38 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_alloc_textures_utils(t_map *map, t_mlx *texture, char *path)
 /**
  * @brief ft_init_alloc_textures: Allocates memory for each different
  * wall texture for the creation of mlx_draw_raycast
- * @return malloc is protected
 */
 void	ft_init_alloc_textures(t_map *map)
 {

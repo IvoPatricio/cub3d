@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:29:24 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 07:28:02 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 07:54:27 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	init_player1(t_data *data, t_play *play)
 */
 void	init_player_rest(t_data *data, t_play *play)
 {
-	if (data->direction == EAST)
+	if (data->direction == WEST)
 	{
 		play->dir_x = -1;
 		play->dir_y = 0;
 		play->plane_x = 0;
 		play->plane_y = 0.66;
 	}
-	else if (data->direction == WEST)
+	else if (data->direction == EAST)
 	{
 		play->dir_x = 1;
 		play->dir_y = 0;

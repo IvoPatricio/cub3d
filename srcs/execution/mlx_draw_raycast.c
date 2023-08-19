@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:11:35 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 07:32:53 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/19 08:26:02 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	draw_roof_floor(t_map *map, int x)
 	y = 0;
 	while (y < (int)WIN_Y)
 	{
-		if (y <= map->ray->drawstart)
-			ft_pixel_drawing(map->mlx, x, y, map->texture->roof);
-		else if (y >= map->ray->drawend)
+		if (y >= map->ray->drawend)
 			ft_pixel_drawing(map->mlx, x, y, map->texture->floor);
+		else if (y <= map->ray->drawstart)
+			ft_pixel_drawing(map->mlx, x, y, map->texture->roof);
 		y++;
 	}
 }
