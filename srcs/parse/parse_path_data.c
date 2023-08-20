@@ -41,7 +41,7 @@ void	paths_parse_caracthers(t_data *data, int i)
 }
 
 /**
- * @brief rgb_check_split: Checks if you can use the function splitting safely
+ * @brief rgb_check_split: Checks if you can use the function split safely
 */
 void	rgb_check_split(char *rgb, int i, t_data *data)
 {
