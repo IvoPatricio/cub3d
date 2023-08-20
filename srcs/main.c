@@ -33,7 +33,6 @@ int	mouse_hook(t_map *map)
 		map->mousex = x;
 	}
 	mlx_mouse_show(map->mlx->mlx_ptr, map->mlx->win_ptr);
-	//mlx_mouse_hide(map->mlx->mlx_ptr, map->mlx->win_ptr);
 	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2,
 		(int)WIN_Y / 2);
 	raydrawing(map);

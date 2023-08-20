@@ -29,4 +29,3 @@ void	array_malloc_error(t_data *data, char **a)
 	if (!a)
 		printf_error(data, "Array Allocation Failed");
 }
-
