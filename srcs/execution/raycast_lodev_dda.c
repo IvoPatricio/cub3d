@@ -12,6 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief raycast_rest_dda: Calculates the distance of perpendicular 
+ * ray (without fisheye) and calculate height of line to draw on screen
+ * wallhit = where exactly the wall was hit
+*/
 void	raycast_rest_dda(t_map *map)
 {
 	t_ray	*ray;
@@ -37,6 +42,10 @@ void	raycast_rest_dda(t_map *map)
 	ray->wallhit -= floor(ray->wallhit);
 }
 
+/**
+ * @brief raycast_dda: jump to next map square, either in x-direction, 
+ * or in y-direction and checks if you hit a wall
+*/
 void	raycast_dda(t_map *map)
 {
 	t_ray	*ray;
@@ -63,6 +72,9 @@ void	raycast_dda(t_map *map)
 	raycast_rest_dda(map);
 }
 
+/**
+ * @brief raycast_2: Calculates the steps and initial sideDist
+*/
 void	raycast_2(t_map *map)
 {
 	t_ray	*ray;
@@ -92,6 +104,10 @@ void	raycast_2(t_map *map)
 	}
 }
 
+/**
+ * @brief raycast_1: calculates the rays position and directions
+ * and x-coordinate in camera space
+*/
 void	raycast_1(t_map *map, int i)
 {
 	t_ray	*ray;

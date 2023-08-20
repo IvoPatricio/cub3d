@@ -20,6 +20,7 @@
 # define ROTATE_SPEED 0.3
 # define PLAYER_SPEED 0.1
 # define MOUSE_SPEED 1
+# define FOV 103
 
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000

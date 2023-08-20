@@ -12,6 +12,10 @@
 
 #include "../../includes/cub3d.h"
 
+/**
+ * @brief draw_wall_textures: draws the walls textures to the screen,
+ * taking in account each pixel colour of the texture
+*/
 void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 {
 	int				y;
@@ -37,7 +41,8 @@ void	draw_wall_textures(t_map *map, t_mlx *texture, int x)
 }
 
 /**
- * @brief draw_walls: 
+ * @brief draw_walls: Its drawing the walls using textures for each
+ * direction of the wall
 */
 void	draw_walls(t_map *map, int x)
 {
@@ -57,6 +62,10 @@ void	draw_walls(t_map *map, int x)
 	}
 }
 
+/**
+ * @brief draw_roof_floor: draws the celling and floor using the value received
+ * from the raycasting of lodev
+*/
 void	draw_roof_floor(t_map *map, int x)
 {
 	int	y;
@@ -72,6 +81,9 @@ void	draw_roof_floor(t_map *map, int x)
 	}
 }
 
+/**
+ * @brief raydrawing: It draws the raycast in vertically stripes
+*/
 void	raydrawing(t_map *map)
 {
 	int	x;

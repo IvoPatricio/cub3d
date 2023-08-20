@@ -108,6 +108,9 @@ void	ft_key_d(t_map *map, int key_code)
 	}
 }
 
+/**
+ * @brief ft_keys: Depending on the keycode it receives it will do an action
+*/
 int	ft_keys(int key_code, t_map *map)
 {
 	if (key_code == CLOSE)

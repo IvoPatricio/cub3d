@@ -56,7 +56,7 @@ void	ft_mlx_init(t_map *map)
 			printf("Error\nMlx_Buffer Allocation Failed");
 			free_structs_mlx(map);
 		}
-		mlx_mouse_show(map->mlx->mlx_ptr, map->mlx->win_ptr);
+		mlx_mouse_hide(map->mlx->mlx_ptr, map->mlx->win_ptr);
 		mlx_loop_hook(map->mlx->mlx_ptr, mouse_hook, map);
 		raydrawing(map);
 		mlx_do_key_autorepeaton(map->mlx->mlx_ptr);

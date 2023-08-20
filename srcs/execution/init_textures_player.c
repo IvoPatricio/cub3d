@@ -24,14 +24,16 @@ void	init_player1(t_data *data, t_play *play)
 	{
 		play->dir_x = 0;
 		play->dir_y = -1;
-		play->plane_x = 0.66;
+		play->plane_x = FOV;
+		play->plane_x /= 100;
 		play->plane_y = 0;
 	}
 	else if (data->direction == SOUTH)
 	{
 		play->dir_x = 0;
 		play->dir_y = 1;
-		play->plane_x = -0.66;
+		play->plane_x = -FOV;
+		play->plane_x /= 100;
 		play->plane_y = 0;
 	}
 	init_player_rest(data, play);
@@ -48,14 +50,16 @@ void	init_player_rest(t_data *data, t_play *play)
 		play->dir_x = -1;
 		play->dir_y = 0;
 		play->plane_x = 0;
-		play->plane_y = 0.66;
+		play->plane_y = FOV;
+		play->plane_y /= 100;
 	}
 	else if (data->direction == EAST)
 	{
 		play->dir_x = 1;
 		play->dir_y = 0;
 		play->plane_x = 0;
-		play->plane_y = -0.66;
+		play->plane_y = -FOV;
+		play->plane_y /= 100;
 	}
 }
 
