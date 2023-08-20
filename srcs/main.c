@@ -32,6 +32,8 @@ int	mouse_hook(t_map *map)
 			ft_key_angle(map, (double)ROTATE_SPEED);
 		map->mousex = x;
 	}
+	mlx_mouse_show(map->mlx->mlx_ptr, map->mlx->win_ptr);
+	//mlx_mouse_hide(map->mlx->mlx_ptr, map->mlx->win_ptr);
 	mlx_mouse_move(map->mlx->mlx_ptr, map->mlx->win_ptr, (int)WIN_X / 2,
 		(int)WIN_Y / 2);
 	raydrawing(map);
@@ -56,7 +58,6 @@ void	ft_mlx_init(t_map *map)
 			printf("Error\nMlx_Buffer Allocation Failed");
 			free_structs_mlx(map);
 		}
-		mlx_mouse_hide(map->mlx->mlx_ptr, map->mlx->win_ptr);
 		mlx_loop_hook(map->mlx->mlx_ptr, mouse_hook, map);
 		raydrawing(map);
 		mlx_do_key_autorepeaton(map->mlx->mlx_ptr);

@@ -49,9 +49,6 @@ int	ft_destroyer(t_map *map)
 	exit(1);
 }
 
-/**
- * @brief
-*/
 void	ft_key_angle(t_map *map, double rotate)
 {
 	double	old_plane_x;

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME		= cub3d
-CC			= gcc -Wall -Wextra -Werror -fsanitize=address -g
+CC			= gcc -Wall -Wextra -Werror #-fsanitize=address -g
 CFLAGS		= -I/usr/include -Imlx_linux -O3
 SRC			= srcs/main.c \
 			srcs/parse/main_parse.c \

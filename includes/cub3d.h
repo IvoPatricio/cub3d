@@ -19,8 +19,9 @@
 # define WIN_Y 640
 # define ROTATE_SPEED 0.3
 # define PLAYER_SPEED 0.1
-# define MOUSE_SPEED 1
 # define FOV 103
+# define MOUSE_SPEED 1
+// Higher MOUSE_SPEED = lower sens
 
 # define RGB_WHITE 0xFFFFFF
 # define RGB_BLACK 0x000000
