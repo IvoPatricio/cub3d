@@ -12,6 +12,9 @@
 
 #include "../includes/cub3d.h"
 
+/**
+ * @brief for some reason mouse hide giving leaks
+*/
 int	mouse_hook(t_map *map)
 {
 	int	x;

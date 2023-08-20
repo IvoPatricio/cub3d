@@ -40,6 +40,35 @@ void	paths_parse_caracthers(t_data *data, int i)
 	}
 }
 
+void	rgb_check_split(t_data *data, int i)
+{
+	int	count;
+
+	count = 0;
+	while (data->f[i])
+	{
+		if (data->f[i] == ',')
+		{
+			count++;
+			if (!data->f[i + 1] || count > 2)
+				printf_error(data, "RGB invalid, related to ','");
+		}
+		i++;
+	}
+	i = 0;
+	count = 0;
+	while (data->c[++i])
+	{
+		if (data->c[i] == ',')
+		{
+			count++;
+			if (!data->c[i + 1] || count > 2)
+				printf_error(data, "RGB invalid, related to ','");
+		}
+		i++;
+	}
+}
+
 /**
  * @brief paths_creation_parse: Separates the values of RGB in an 
  * Array of strings and afterwards it checks if the RGB value is 
@@ -51,9 +80,10 @@ void	paths_creation_parse(t_data *data)
 {
 	int	i;
 
+	i = 0;
+	rgb_check_split(data, i);
 	data->f_arr = ft_split(data->f, ',');
 	data->c_arr = ft_split(data->c, ',');
-	i = 0;
 	while (i < 3)
 	{
 		paths_parse_caracthers(data, i);

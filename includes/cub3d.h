@@ -233,6 +233,7 @@ void						init_player_rest(t_data *data, t_play *play);
 void						init_player1(t_data *data, t_play *play);
 int							create_trgb(int t, int r, int g, int b);
 void						map_rgb(t_data *data, t_texture *texture);
+void						rgb_check_split(t_data *data, int i);
 
 // free_utils.c //
 void						free_map(t_data *data);
