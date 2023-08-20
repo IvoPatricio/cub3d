@@ -14,7 +14,7 @@
 
 void	printf_error(t_data *data, const char *str)
 {
-	perror("\e[1;31mERROR");
+	printf("\e[1;31mERROR\n");
 	printf("\e[0;0m\e[0;34m%s\n\e[0;0m", str);
 	free_map(data);
 	exit(0);

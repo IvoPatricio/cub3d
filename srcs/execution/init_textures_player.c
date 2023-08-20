@@ -94,13 +94,17 @@ void	init_textured(t_data *data, t_texture *texture)
 void	init_structs(t_map *map)
 {
 	map->texture = malloc(sizeof(t_texture));
-	struct_malloc_error(map, map->texture, sizeof(map->texture));
+	if (map->texture == NULL)
+		free_structs_mlx(map);
 	map->play = malloc(sizeof(t_play));
-	struct_malloc_error(map, map->play, sizeof(map->play));
+	if (map->play == NULL)
+		free_structs_mlx(map);
 	map->ray = malloc(sizeof(t_ray));
-	struct_malloc_error(map, map->ray, sizeof(map->ray));
+	if (map->ray == NULL)
+		free_structs_mlx(map);
 	map->mlx = malloc(sizeof(t_mlx));
-	struct_malloc_error(map, map->mlx, sizeof(map->mlx));
+	if (map->mlx == NULL)
+		free_structs_mlx(map);
 	map->map = map->data->map;
 	map->map[map->data->player_y][map->data->player_x] = FLOOR;
 	init_textured(map->data, map->texture);

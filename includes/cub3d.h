@@ -238,8 +238,6 @@ void						map_rgb(t_data *data, t_texture *texture);
 void						free_map(t_data *data);
 void						free_rest_map(t_data *data);
 void						free_structs_mlx(t_map *map);
-void						struct_malloc_error(t_map *map, const void *random,
-								size_t size);
 void						string_malloc_error(t_data *data, char *a);
 void						array_malloc_error(t_data *data, char **a);
 

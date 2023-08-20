@@ -75,7 +75,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		map.data = malloc(sizeof(t_data));
-		struct_malloc_error(&map, map.data, sizeof(map.data));
+		if (map.data == NULL)
+			free_structs_mlx(&map);
 		main_parse(map.data, argv);
 		init_structs(&map);
 		printf_map(map.data);
