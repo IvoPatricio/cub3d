@@ -40,33 +40,23 @@ void	paths_parse_caracthers(t_data *data, int i)
 	}
 }
 
-void	rgb_check_split(t_data *data, int i)
+void	rgb_check_split(char *rgb, int i, t_data *data)
 {
 	int	count;
 
 	count = 0;
-	while (data->f[i])
+	while (rgb[i])
 	{
-		if (data->f[i] == ',')
+		if (rgb[i] == ',')
 		{
 			count++;
-			if (!data->f[i + 1] || count > 2)
-				printf_error(data, "RGB invalid, related to ','");
+			if (!rgb[i + 1])
+				printf_error(data, "RGB invalid, no values after ','");
 		}
 		i++;
 	}
-	i = 0;
-	count = 0;
-	while (data->c[++i])
-	{
-		if (data->c[i] == ',')
-		{
-			count++;
-			if (!data->c[i + 1] || count > 2)
-				printf_error(data, "RGB invalid, related to ','");
-		}
-		i++;
-	}
+	if (count != 2)
+		printf_error(data, "RGB invalid there must be only two ','");
 }
 
 /**
@@ -81,7 +71,8 @@ void	paths_creation_parse(t_data *data)
 	int	i;
 
 	i = 0;
-	rgb_check_split(data, i);
+	rgb_check_split(data->f, i, data);
+	rgb_check_split(data->c, i, data);
 	data->f_arr = ft_split(data->f, ',');
 	data->c_arr = ft_split(data->c, ',');
 	while (i < 3)
