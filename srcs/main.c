@@ -6,14 +6,14 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:22:25 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 12:38:16 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:52:12 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 /**
- * @brief for some reason mouse hide giving leaks
+ * @brief mouse_hook: for some reason mouse hide giving leaks
 */
 int	mouse_hook(t_map *map)
 {
@@ -42,6 +42,9 @@ int	mouse_hook(t_map *map)
 	return (0);
 }
 
+/**
+ * @brief ft_mlx_init: Creates the actions of MLX library
+*/
 void	ft_mlx_init(t_map *map)
 {
 	map->mousex = (int)WIN_X / 2;
@@ -70,6 +73,10 @@ void	ft_mlx_init(t_map *map)
 	}
 }
 
+/**
+ * @brief main: checks if the argc is correct and calls the parsing
+ * and execution
+*/
 int	main(int argc, char **argv)
 {
 	t_map	map;

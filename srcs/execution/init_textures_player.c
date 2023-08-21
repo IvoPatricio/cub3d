@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:29:24 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/19 07:54:27 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:57:52 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void	init_player_rest(t_data *data, t_play *play)
 
 /**
  * @brief init_textured: saves the values of the variables
- * to the struct texture, even tho it wasnt needed :laugh:
- * just easier for the printf structs
+ * to the struct texture
 */
 void	init_textured(t_data *data, t_texture *texture)
 {
