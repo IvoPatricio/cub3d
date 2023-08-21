@@ -6,7 +6,7 @@
 /*   By: ifreire- <ifreire-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:29:24 by ifreire-          #+#    #+#             */
-/*   Updated: 2023/08/21 17:57:52 by ifreire-         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:02:51 by ifreire-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_player1(t_data *data, t_play *play)
 */
 void	init_player_rest(t_data *data, t_play *play)
 {
-	if (data->direction == WEST)
+	if (data->direction == EAST)
 	{
 		play->dir_x = -1;
 		play->dir_y = 0;
@@ -53,7 +53,7 @@ void	init_player_rest(t_data *data, t_play *play)
 		play->plane_y = FOV;
 		play->plane_y /= 100;
 	}
-	else if (data->direction == EAST)
+	else if (data->direction == WEST)
 	{
 		play->dir_x = 1;
 		play->dir_y = 0;
